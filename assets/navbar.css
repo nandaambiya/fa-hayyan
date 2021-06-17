@@ -1,0 +1,30 @@
+
+ul li:hover ul{
+    display: block;
+}
+ul li ul{
+    display: none;
+}        
+.navbar { // the initial style of the navbar
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    transition: all 0.3s;
+}
+
+ .navbar-dark {
+    background-color: #2a351f;
+    font-size:18px;
+    }
+.navbar a {
+    color: #fff1b5 !important;
+
+.navbar.compressed { // the styles that overrides the initial style when the user scroll down
+
+    background: #6dcc7c;
+    color: #6dcc7c;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}  
+.dropdown-menu:hover a{
+    background-color: black;
+}  

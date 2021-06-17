@@ -1,0 +1,21 @@
+<?php
+	session_start();
+
+	include 'koneksi.php';
+	$edisi = $_POST['edisi'];
+
+	$query = "SELECT id_warna, warna FROM kategori_warna_produk WHERE id_edisi=? ORDER BY warna ASC";
+	$dewan1 = $koneksi->prepare($query);
+	$dewan1->bind_param("i", $edisi);
+	$dewan1->execute();
+	$res1 = $dewan1->get_result();
+	while ($row = $res1->fetch_assoc()) {
+		
+		if ($row['id_warna'] == $_SESSION['warna']['id_warna']){
+			echo "<option value='" . $row['id_warna'] . "' selected>" . $row['warna'] . "</option>";
+		}
+		else{
+			echo "<option value='" . $row['id_warna'] . "'>" . $row['warna'] . "</option>";
+		}
+	}
+?>
