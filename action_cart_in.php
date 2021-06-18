@@ -10,8 +10,6 @@ session_start();
 
 include 'koneksi.php';
 
-
-
 if (!isset($_SESSION['customer']) || empty($_SESSION['customer'])) {
 	echo  '<script type="text/javascript">
 			swal({title: "BELUM LOGIN", 
@@ -26,7 +24,7 @@ if (!isset($_SESSION['customer']) || empty($_SESSION['customer'])) {
 else{
 $id = $_GET['id'];
 
-$data = $koneksi->query("SELECT stok_produk FROM produk WHERE id_produk = '$id'")->fetch_assoc();
+$data = $koneksi->query("SELECT stok FROM listproduk WHERE id_produk = '$id' GROUP BY id_produk")->fetch_assoc();
 
 if (empty($_SESSION['cart'][$id]) || !empty($_SESSION['cart'][$id]) == 0) {
 	$_SESSION['cart'][$id] = 1;

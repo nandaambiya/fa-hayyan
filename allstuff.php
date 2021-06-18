@@ -35,11 +35,6 @@ include 'koneksi.php';
         <a style="color: #48695a" class="dropdown-item" href="?sortBy=Nama, Z - A">Nama, Z - A</a>
         <a style="color: #48695a" class="dropdown-item" href="?sortBy=Harga, rendah - tinggi">Harga, rendah - tinggi</a>
         <a style="color: #48695a" class="dropdown-item" href="?sortBy=Harga, tinggi - rendah">Harga, tinggi - rendah</a>
-        <a style="color: #48695a" class="dropdown-item" href="?sortBy=Edisi">Edisi</a>
-        <a style="color: #48695a" class="dropdown-item" href="?sortBy=Date, baru - lama">Date, baru - lama</a>
-        <a style="color: #48695a" class="dropdown-item" href="?sortBy=Date, lama - baru">Date, lama - baru</a>
-        <a style="color: #48695a" class="dropdown-item" href="?sortBy=Masker - Scrunchie">Masker - Scrunchie</a>
-        <a style="color: #48695a" class="dropdown-item" href="?sortBy=Scrunchie - Masker">Scrunchie - Masker</a>
       </div>
     </div>
   </div>
@@ -56,7 +51,7 @@ include 'koneksi.php';
       $previous = $halaman - 1;
       $next = $halaman + 1;
 
-      $data = mysqli_query($koneksi, "SELECT * from produk WHERE stok_produk > 0");
+      $data = mysqli_query($koneksi, "SELECT id_produk FROM listproduk WHERE stok > 0 GROUP BY id_produk");
       $jumlah_data = mysqli_num_rows($data);
       $total_halaman = ceil($jumlah_data / $batas);
 
@@ -65,29 +60,19 @@ include 'koneksi.php';
         echo "<script>window.history.back();</script>";
       }
 
-      $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY nama_produk LIMIT $halaman_awal, $batas");
+      $take = $koneksi->query("SELECT id_produk, nama, stok, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk LIMIT $halaman_awal, $batas");
 
       if (isset($_GET['sortBy'])) {
         $sort = $_GET['sortBy'];
 
         if ($sort == "Nama, A - Z") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY nama_produk ASC LIMIT $halaman_awal, $batas");
+          $take = $koneksi->query("SELECT id_produk, nama, stok, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY nama ASC LIMIT $halaman_awal, $batas");
         } else if ($sort == "Nama, Z - A") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY nama_produk DESC LIMIT $halaman_awal, $batas");
+          $take = $koneksi->query("SELECT id_produk, nama, stok, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY nama DESC LIMIT $halaman_awal, $batas");
         } else if ($sort == "Harga, rendah - tinggi") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY harga_produk ASC LIMIT $halaman_awal, $batas");
+          $take = $koneksi->query("SELECT id_produk, nama, stok, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY harga ASC LIMIT $halaman_awal, $batas");
         } else if ($sort == "Harga, tinggi - rendah") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY harga_produk DESC LIMIT $halaman_awal, $batas");
-        } else if ($sort == "Date, baru - lama") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY id_produk DESC LIMIT $halaman_awal, $batas");
-        } else if ($sort == "Date, lama - baru") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY id_produk ASC LIMIT $halaman_awal, $batas");
-        } else if ($sort == "Edisi") {
-          $take = $koneksi->query("SELECT p.id_produk, p.id_warna, p.nama_produk, p.harga_produk, p.foto_produk, p.stok_produk FROM produk p JOIN kategori_warna_produk w ON p.id_warna = w.id_warna AND p.stok_produk > 0 JOIN kategori_produk_edisi e ON w.id_edisi = e.id_edisi ORDER BY e.edisi LIMIT $halaman_awal, $batas");
-        } else if ($sort == "Masker - Scrunchie") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY id_jenis ASC LIMIT $halaman_awal, $batas");
-        } else if ($sort == "Scrunchie - Masker") {
-          $take = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY id_jenis DESC LIMIT $halaman_awal, $batas");
+          $take = $koneksi->query("SELECT id_produk, nama, stok, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY harga DESC LIMIT $halaman_awal, $batas");
         }
       }
 
@@ -99,10 +84,10 @@ include 'koneksi.php';
 
           <a href="detail.php?id=<?php echo $data['id_produk'] ?>" style="color: inherit; text-decoration: none;">
             <figure class="card card-product">
-              <div class="img-wrap"><img src="image/<?php echo $data['foto_produk'] ?>"></div>
+              <div class="img-wrap"><img src="image/<?php echo $data['gambar'] ?>"></div>
               <figcaption class="info-wrap">
-                <h6 class="title"><?php echo $data['nama_produk']; ?></h6>
-                <p class="desc">Stok : <?php echo number_format($data['stok_produk']); ?></p>
+                <h6 class="title"><?php echo $data['nama']; ?></h6>
+                <p class="desc">Stok : <?php echo number_format($data['stok']); ?></p>
                 <!-- <div class="rating-wrap">	
             <div class="label-rating">132 reviews</div>
             <div class="label-rating">154 orders </div>
@@ -110,7 +95,7 @@ include 'koneksi.php';
               </figcaption>
               <div class="bottom-wrap">
                 <div class="price-wrap h5 float-left">
-                  <span class="price-new">Rp <?php echo number_format($data['harga_produk']); ?>,00</span>
+                  <span class="price-new">Rp <?php echo number_format($data['harga']); ?>,00</span>
                 </div> <!-- price-wrap.// -->
               </div>
               <div class="bottom-wrap" style="align-self: initial;">

@@ -79,15 +79,16 @@
 			  		foreach ($_SESSION['cart'] as $id => $jumlah) :
 			  	?>
 			  	<?php
-			  		$data = $koneksi->query("SELECT id_produk, nama_produk, foto_produk, harga_produk, stok_produk FROM produk WHERE id_produk = '$id'")->fetch_assoc();
-			  		$subharga = $data['harga_produk'] * $jumlah;
+			  		$query_ambil = "SELECT id_produk, nama, gambar, harga, stok FROM listproduk WHERE id_produk = '$id' GROUP BY id_produk";
+			  		$data = $koneksi->query($query_ambil)->fetch_assoc();
+			  		$subharga = $data['harga'] * $jumlah;
 			  	?>
 			    <tr>
 			      
-			      	<td><a href="detail.php?id=<?php echo $id ?>"><img width="100px" src="image/<?php echo $data['foto_produk'] ?>"></a></td>
-			      	<td><a style="color: inherit; text-decoration: none;" href="detail.php?id=<?php echo $id ?>"><?php echo $data['nama_produk']; ?></a></td>
-			  		<td>Rp <?php echo number_format($data['harga_produk']); ?>,-</td>
-			  		<td><input type="number" name="jumlah<?php echo $id ?>" value="<?php echo $jumlah; ?>" min="1" max="<?php echo $data['stok_produk']; ?>" style="width: 55px;" required></td>
+			      	<td><a href="detail.php?id=<?php echo $id ?>"><img width="100px" src="image/<?php echo $data['gambar'] ?>"></a></td>
+			      	<td><a style="color: inherit; text-decoration: none;" href="detail.php?id=<?php echo $id ?>"><?php echo $data['nama']; ?></a></td>
+			  		<td>Rp <?php echo number_format($data['harga']); ?>,-</td>
+			  		<td><input type="number" name="jumlah<?php echo $id ?>" value="<?php echo $jumlah; ?>" min="1" max="<?php echo $data['stok']; ?>" style="width: 55px;" required></td>
 			  		<td>Rp <?php echo number_format($subharga); ?>,-</td>
 			  		<div class="sampah">
 			  		<td style="text-align: right;"><a href="action_cart_delete.php?id=<?php echo $id ?>" onclick="return confirm('Yakin ingin menghapus item ini?')"><img src="icon/delete.png" style="width: 25px"></a></td></div>

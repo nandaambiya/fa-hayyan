@@ -56,15 +56,15 @@
                         <div style="text-align: left !important;" class="card-body">
                             <form class="form" id="ongkir" method="POST">
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Kota Asal:</label>
+                                    <label class="control-label col-sm-4">Kota Asal</label>
                                     <div class="col-sm-12">
                                         <select class="form-control" disabled="true" name="kota_asal" required="">
-                                            <option value="">Binjai</option>
+                                            <option value="">Medan</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Kota Tujuan:</label>
+                                    <label class="control-label col-sm-4">Kota Tujuan</label>
                                     <div class="col-sm-12">          
                                         <select class="form-control" id="kota_tujuan" name="kota_tujuan" required="">
                                             <option></option>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-4">Kurir:</label>
+                                    <label class="control-label col-sm-4">Kurir</label>
                                     <div class="col-sm-12">          
                                         <select class="form-control" id="kurir" name="kurir" required="">
                                             <option value="" selected="selected">--Pilih kurir--</option>

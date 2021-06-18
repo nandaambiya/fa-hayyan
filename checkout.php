@@ -124,14 +124,14 @@
 			  	   foreach ($_SESSION['cart'] as $id => $jumlah): 
 			  	?>
 			  	<?php 
-			  		$data = $koneksi->query("SELECT id_produk, nama_produk, foto_produk, harga_produk FROM produk WHERE id_produk = '$id'")->fetch_assoc();
-			  		$subharga = $data['harga_produk'] * $jumlah;
+			  		$data = $koneksi->query("SELECT id_produk, nama, gambar, harga FROM listproduk WHERE id_produk = '$id' GROUP BY id_produk")->fetch_assoc();
+			  		$subharga = $data['harga'] * $jumlah;
 			  	?>
 			  	<tr>
 			  		<td><?= $no ?></td>
-			  		<td><a href="detail.php?id=<?php echo $id ?>"><img width="100px" src="image/<?php echo $data['foto_produk'] ?>"></a></td>
-			      	<td><a style="color: inherit; text-decoration: none;" href="detail.php?id=<?php echo $id ?>"><?php echo $data['nama_produk']; ?></a></td>
-			  		<td align="center">Rp <?php echo number_format($data['harga_produk']); ?>,-</td>
+			  		<td><a href="detail.php?id=<?php echo $id ?>"><img width="100px" src="image/<?php echo $data['gambar'] ?>"></a></td>
+			      	<td><a style="color: inherit; text-decoration: none;" href="detail.php?id=<?php echo $id ?>"><?php echo $data['nama']; ?></a></td>
+			  		<td align="center">Rp <?php echo number_format($data['harga']); ?>,-</td>
 			  		<td align="center"><?= number_format($jumlah) ?></td>
 			  		<td align="right">Rp <?= number_format($subharga) ?>,-</td>
 			  	</tr>
@@ -205,37 +205,48 @@
 		if (isset($_POST['checkout'])) {
 
 			$id_pemesan = $_SESSION['customer']['id_akun'];
-			$tanggal_pemesanan = date("d-m-Y");
-			$subtotal_produk = $subtotalBarang;
 			$alamat_kirim = $_SESSION['customer']['alamat'].", Kota ".$_SESSION['shipping']['tujuan'].", ".$_SESSION['customer']['kode_pos'];
 			$opsi_pengiriman = $_SESSION['shipping']['kurir'].", ".$_SESSION['shipping']['jenisLayanan'];
 			$subtotal_pengiriman = $_SESSION['shipping']['tarif'];
 
-			$koneksi->query("INSERT INTO pesanan (id_akun, tanggal_pesan, subtotal_produk, alamat_kirim, opsi_pengiriman, subtotal_pengiriman)
-								          VALUES ('$id_pemesan', '$tanggal_pemesanan', '$subtotal_produk', '$alamat_kirim', '$opsi_pengiriman', '$subtotal_pengiriman')");
+			try {
+				$koneksi->begin_transaction();
 
-			$id_pesanan = $koneksi->insert_id;
+				$koneksi->query("INSERT INTO pesanan (id_akun, tanggal, alamat, opsi_kirim, ongkos_kirim)
+									          VALUES ('$id_pemesan', date_format(now(),'%d-%m-%Y'), '$alamat_kirim', '$opsi_pengiriman', '$subtotal_pengiriman')");
 
-			foreach ($_SESSION['cart'] as $id_produk => $jumlah) {
-				$koneksi->query("INSERT INTO pesanan_produk (id_pesanan, id_produk, jumlah_pesanan)
-													VALUES ('$id_pesanan', '$id_produk', '$jumlah')");
+				$id_pesanan = $koneksi->insert_id;
 
-				$koneksi->query("UPDATE produk SET stok_produk = stok_produk-$jumlah WHERE id_produk = '$id_produk'");
+				foreach ($_SESSION['cart'] as $id_produk => $jumlah) {
+					$koneksi->query("INSERT INTO pesanan_detail (id_pesanan, id_produk, jumlah_beli)
+														VALUES ('$id_pesanan', '$id_produk', '$jumlah')");
+				}
+
+				$koneksi->commit();
+
+				unset($_SESSION['cart']);
+				unset($_SESSION['shipping']);
+
+				echo  '<script type="text/javascript">
+	                        swal({title: "Checkout Berhasil!", 
+	                          text: "Yuk, segera lakukan pembayaran!", 
+	                          icon: "success"
+	                        }).then(function() {
+	                          window.location = "nota.php?id='.$id_pesanan.'";
+	                        });
+	                     </script>';
+            } catch (Exception $e) {
+				$koneksi->rollback();
+				echo  '<script type="text/javascript">
+	                        swal({title: "Checkout Gagal!", 
+	                          text: "Yuk, segera lakukan pembayaran!", 
+	                          icon: "success"
+	                        }).then(function() {
+	                          window.location = "keranjang.php";
+	                        });
+	                     </script>';
 			}
-
-			unset($_SESSION['cart']);
-			unset($_SESSION['shipping']);
-
-			echo  '<script type="text/javascript">
-                        swal({title: "Checkout Berhasil!", 
-                          text: "Yuk, segera lakukan pembayaran!", 
-                          icon: "success"
-                        }).then(function() {
-                          window.location = "nota.php?id='.$id_pesanan.'";
-                        });
-                     </script>';
 		}
-
 	?>
 
 </body>

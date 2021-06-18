@@ -2,7 +2,7 @@
     <link rel="icon" type="image/*" href="icon/fa_hayyan.png">
 </head>
 <?php
-    $kota_asal = '70';
+    $kota_asal = '278';
     $kota_tujuan = $_POST['kota_tujuan'];
     $kurir = $_POST['kurir'];
     $berat = $_POST['berat'] * 1000;
@@ -72,7 +72,7 @@
                 <tr>
                     <th>Nama Layanan</th>
                     <th>Tarif</th>
-                    <th>ETD(Estimates Days)</th>
+                    <th>Estimasi Sampai</th>
                     <th style="width: 37px"></th>
                 </tr>
             </thead>
@@ -84,7 +84,7 @@
 
                     foreach ($value['cost'] as $tarif) {
                         echo "<td align='right'>Rp " . number_format($tarif['value']) . "</td>";
-                        echo "<td>" . $tarif['etd'] . " D</td>";
+                        echo "<td>" . $tarif['etd'] . " Hari</td>";
                         echo "<td><input class='form-control' type='radio' required name='pilOngkir' value='".$value['service'].",".$tarif['value']."'></td>";
                     }
 

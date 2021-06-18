@@ -2,7 +2,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-
+ 
 <!-- Footer -->
   <section id="footer">
     <div class="container">
@@ -17,7 +17,7 @@
         <div class="col-xs-14 col-sm-6 col-md-4">
           <h5 style="color: #fff1b5">Quick links</h5>
           <ul class="list-unstyled quick-links">
-            <li><a href="allstuff.php"></i>Shop All</a></li>
+            <li><a href="allstuff.php">Shop All</a></li>
             <!-- <li><a href="http://localhost/tubesIMK/edisi.php?item=1"></i>Masker</a></li>
             <li><a href="http://localhost/tubesIMK/edisi.php?item=2"></i>Scrunchie</a></li> -->
             <li class="nav-item dropdown">
@@ -25,14 +25,12 @@
           Kategori
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="background-color: #2a351f;">
-          <a class="dropdown-item" href="#">Kategori 1</a>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Kumur">Obat Kumur</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Kategori 2</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Kategori 3</a>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Bebas Terbatas">Obat Bebas Terbatas</a>
         </div>
             </li>
-            <li><a href="keranjang.php"></i>Cart</a></li>
+            <li><a href="keranjang.php">Cart</a></li>
             
           </ul>
         </div>

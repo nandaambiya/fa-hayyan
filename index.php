@@ -97,18 +97,14 @@ include 'koneksi.php';
             </figure>
           </div> <!-- col // -->
         <?php } ?>
-
       </div> <!-- row.// -->
 
       <br><br>
 
       <h4>Check all of them out <a href="allstuff.php">here!</a></h4>
-
+    </section>
   </div>
   <!--container.//-->
-
-
-  </div>
   <?php include "footer.php"; ?>
 </body>
 

@@ -15,11 +15,11 @@
          Kategori
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="background-color: #2a351f;">
-          <a class="dropdown-item" href="#">Kategori 1</a>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Kumur">Obat Kumur</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Kategori 2</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Kategori 3</a>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Bebas Terbatas">Obat Bebas Terbatas</a>
+          <!-- <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Kategori 3</a> -->
         </div>
             </li>
             <!-- <li class="nav-item">
