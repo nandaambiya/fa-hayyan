@@ -56,6 +56,16 @@ include 'koneksi.php';
     </div>
 
     <div class="form-group">
+      <label for="alamat">Address</label>
+      <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required>
+    </div>
+
+    <div class="form-group">
+      <label for="kode_pos">Kode Pos</label>
+      <input type="text" name="kode_pos" id="kode_pos" onkeypress="return hanyaAngka(event)" class="form-control" placeholder="Kode Pos" required>
+    </div>
+
+    <div class="form-group">
       <label for="passw">Password</label>
       <input id="passw" type="password" name="password" class="form-control" placeholder="Password" required>
     </div>
@@ -83,6 +93,8 @@ include 'koneksi.php';
       $email = $_GET['email'];
       $nama = $_POST['nama'];
       $nope = $_POST['nope'];
+      $alamat = $_POST['alamat'];
+      $kode_pos = $_POST['kode_pos'];
       $password = $_POST['password'];
 
       $cek = $koneksi->query("SELECT id_akun FROM akun WHERE email = '$email'");
@@ -101,8 +113,8 @@ include 'koneksi.php';
       else{
         $type = 2;
 
-        $koneksi->query("INSERT INTO akun (email, password, nama, no_hp, type_user)
-                          VALUES ('$email', '$password', '$nama', '$nope', '$type')");
+        $koneksi->query("INSERT INTO akun (email, password, nama, no_hp, alamat, kode_pos, user_db)
+                          VALUES ('$email', '$password', '$nama', '$nope', '$alamat', '$kode_pos', '$type')");
 
         echo  '<script type="text/javascript">
                         swal({title: "Registrasi Berhasil!", 
@@ -136,6 +148,14 @@ include 'koneksi.php';
             minlength : 3,
             maxlength : 20
           },
+          alamat:{
+            minlength : 15
+          },
+          kode_pos:{
+            digits : true,
+            minlength : 5,
+            maxlength : 5
+          },
           password:{
             minlength: 6
           },
@@ -158,6 +178,16 @@ include 'koneksi.php';
             digits : "<font color = 'red'>Format tidak sesuai!</font>",
             minlength : "No. HP minimal 3 digit.",
             maxlength : "No. HP maksimal 20 digit."
+          },
+          alamat:{
+            required : "<font color = 'red'>Alamat tidak boleh kosong!</font>",
+            minlength : "Masukkan alamat lengkap."
+          },
+          kode_pos:{
+            required : "<font color = 'red'>Kode Pos tidak boleh kosong!</font>",
+            digits : "<font color = 'red'>Format tidak sesuai!</font>",
+            minlength : "Masukkan Kode Pos yang benar (5 digit).",
+            maxlength : "Masukkan Kode Pos yang benar (5 digit)."
           },
           password:{
             required : "<font color = 'red'>Password tidak boleh kosong!</font>",

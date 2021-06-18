@@ -163,8 +163,8 @@
           kode_pos:{
             required : "<font color = 'red'>Kode pos tidak boleh kosong!</font>",
             digits : "<font color = 'red'>Format tidak sesuai!</font>",
-            minlength : "Kode pos minimal 5 digit.",
-            maxlength : "Kode pos maksimal 5 digit."
+            minlength : "Masukkan Kode Pos yang benar (5 digit).",
+            maxlength : "Masukkan Kode Pos yang benar (5 digit)."
           },
           nope:{
             required : "<font color = 'red'>No. HP tidak boleh kosong!</font>",

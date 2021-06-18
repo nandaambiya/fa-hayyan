@@ -75,14 +75,14 @@ else if(isset($_SESSION['admin'])){
 
           if ($data['password'] == $password) {
 
-            if ($data['type_user'] == 1) {
+            if ($data['user_db'] == 1) {
               $_SESSION['admin'] = $data;
 
               echo "<script> alert('Login berhasil!') </script>";
               echo "<script>location='admin/';</script>";
             }
 
-            else if ($data['type_user'] == 2){
+            else if ($data['user_db'] == 2){
               $_SESSION['customer'] = $data;
 
               echo  '<script type="text/javascript">

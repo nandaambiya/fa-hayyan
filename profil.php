@@ -43,7 +43,7 @@
 			    </tr>
 			    <tr>
 			      <td>Password</td>
-			      <td><input class="form control" style="border: none;" type="Password" value="****" disabled></td>
+			      <td><input class="form control" style="border: none;" type="Password" value="*****" disabled></td>
 			    </tr>
 			    <tr>
 			      <td>No Hp</td>
