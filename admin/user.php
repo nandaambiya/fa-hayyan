@@ -18,6 +18,7 @@
 			<th>Email</th>
 			<th>Alamat</th>
 			<th>Nomor HP</th>
+			<th></th>
         </tr>
     </thead>
 
@@ -33,10 +34,13 @@
             <td>".$row['alamat']."</td>
             <td>".$row['no_hp']."</td>
 			</td>
-        </tr>";
+			
+        </tr>"
+        ;
         
         }
     ?>
+
     </tbody>
 
     <script>

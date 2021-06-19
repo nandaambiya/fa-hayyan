@@ -62,7 +62,9 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     <li><a href="index.php?halaman=produk">Produk</a></li>
                     <li><a href="index.php?halaman=produk_edisi">&nbsp;&nbsp;↳ Daftar Edisi - Produk</a></li>
                     <li><a href="index.php?halaman=pesanan">Pesanan</a></li>
-                    <li><a href="index.php?halaman=user">Akun Pelanggan</a></li>
+                    <li><a href="index.php?halaman=user">Akun Customer</a></li>
+                    <li><a href="index.php?halaman=satuan_ukuran">Satuan Ukuran</a></li>
+                    <li><a href="index.php?halaman=satuan_barang">Satuan Barang</a></li>
                 </ul>
                
             </div>
@@ -127,6 +129,30 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     }
                     elseif ($_GET['halaman']=="riwayat"){
                         include 'riwayat.php';
+                    }
+                     elseif ($_GET['halaman']=="satuan_ukuran"){
+                        include 'satuan_ukuran.php';
+                    }
+                     elseif ($_GET['halaman']=="satuan_ukuran_tambah"){
+                        include 'satuan_ukuran_tambah.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_ukuran_ubah"){
+                        include 'satuan_ukuran_ubah.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_ukuran_hapus"){
+                        include 'satuan_ukuran_hapus.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_barang"){
+                        include 'satuan_barang.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_barang_tambah"){
+                        include 'satuan_barang_tambah.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_barang_ubah"){
+                        include 'satuan_barang_ubah.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_barang_hapus"){
+                        include 'satuan_barang_hapus.php';
                     }
                 }
                 else{
