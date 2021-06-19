@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2021 at 09:59 PM
+-- Generation Time: Jun 19, 2021 at 05:52 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,6 +20,41 @@ SET time_zone = "+00:00";
 --
 -- Database: `fa-hayyan`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cariProduk` (IN `kywrd` VARCHAR(255))  NO SQL
+BEGIN
+SELECT
+    *
+FROM
+    `listproduk`
+WHERE
+    nama LIKE CONCAT('%', kywrd, '%')
+    OR merk LIKE CONCAT('%', kywrd, '%')
+    OR harga LIKE CONCAT('%', kywrd, '%')
+    OR satuan_barang LIKE CONCAT('%', kywrd, '%')
+    OR jenis LIKE CONCAT('%', kywrd, '%')
+    OR deskripsi LIKE CONCAT('%', kywrd, '%')
+    AND stok > 0
+GROUP BY
+	id_produk;
+END$$
+
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `hitung_harga_total` (`id_prdk` INT(4), `jmlh` INT(4)) RETURNS INT(11) NO SQL
+BEGIN
+	DECLARE hrg INT;
+	SELECT harga INTO hrg FROM produk WHERE id_produk = id_prdk;
+    
+    RETURN hrg * jmlh;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -91,6 +126,26 @@ INSERT INTO `akun_db` (`id_akun_db`, `akun`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `detail_user_pesanan`
+-- (See below for the actual view)
+--
+CREATE TABLE `detail_user_pesanan` (
+`id_pesanan` int(5)
+,`id_akun` int(5)
+,`tanggal` char(10)
+,`nama` varchar(50)
+,`no_hp` varchar(15)
+,`email` varchar(320)
+,`alamat` text
+,`ongkos_kirim` int(10)
+,`opsi_kirim` varchar(100)
+,`status` enum('Belum Dibayar','Dibayar','Dikirim','Dibatalkan','Pembayaran Invalid')
+,`resi_pengiriman` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jenis_produk`
 --
 
@@ -108,6 +163,20 @@ INSERT INTO `jenis_produk` (`id_jenis`, `jenis`) VALUES
 (2, 'Obat Bebas Terbatas'),
 (3, 'Obat Keras'),
 (4, 'Salep');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `listpesanan`
+-- (See below for the actual view)
+--
+CREATE TABLE `listpesanan` (
+`id_akun` int(5)
+,`id_pesanan` int(5)
+,`tanggal` char(10)
+,`status` enum('Belum Dibayar','Dibayar','Dikirim','Dibatalkan','Pembayaran Invalid')
+,`total_bayar` decimal(33,0)
+);
 
 -- --------------------------------------------------------
 
@@ -167,7 +236,7 @@ INSERT INTO `log_edit_profil` (`id_log_edit_profil`, `id_akun`, `nama_lama`, `na
 CREATE TABLE `log_produk_stok` (
   `id_log_produk_stok` int(10) NOT NULL,
   `id_produk` int(4) NOT NULL,
-  `aksi` enum('Penambahan','Pengurangan','Stok Baru') NOT NULL,
+  `aksi` enum('Penambahan','Pengurangan','Barang Baru') NOT NULL,
   `stok_lama` int(4) NOT NULL,
   `stok_baru` int(4) NOT NULL,
   `timestamp` char(19) NOT NULL
@@ -182,7 +251,7 @@ INSERT INTO `log_produk_stok` (`id_log_produk_stok`, `id_produk`, `aksi`, `stok_
 (18, 2, 'Pengurangan', 15, 14, '18-06-2021 18:17:02'),
 (19, 1, 'Pengurangan', 22, 21, '18-06-2021 18:17:02'),
 (20, 1, 'Penambahan', 21, 25, '18-06-2021 18:33:47'),
-(21, 3, 'Stok Baru', 0, 20, '18-06-2021 19:16:32'),
+(21, 3, 'Barang Baru', 0, 20, '18-06-2021 19:16:32'),
 (22, 3, 'Pengurangan', 20, 0, '18-06-2021 19:16:56'),
 (23, 3, 'Penambahan', 0, 3, '18-06-2021 20:17:45'),
 (24, 1, 'Pengurangan', 25, 24, '19-06-2021 02:48:17'),
@@ -199,9 +268,16 @@ CREATE TABLE `pembayaran` (
   `id_pesanan` int(5) NOT NULL,
   `pembayar` varchar(50) NOT NULL,
   `tanggal` char(10) NOT NULL,
-  `metode` enum('BRI','OVO','Dana','Gopay') NOT NULL,
+  `metode` enum('BNI','OVO','Dana','Gopay') NOT NULL,
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_pesanan`, `pembayar`, `tanggal`, `metode`, `bukti`) VALUES
+(1, 2, 'Ilham', '19-06-2021', 'OVO', '19062021162609_nopem_2_4e0b8f4dccd1d54255060000.jpg');
 
 -- --------------------------------------------------------
 
@@ -216,7 +292,7 @@ CREATE TABLE `pesanan` (
   `alamat` text NOT NULL,
   `opsi_kirim` varchar(100) NOT NULL,
   `ongkos_kirim` int(10) NOT NULL,
-  `status` enum('Belum Dibayar','Dibayar','Dikirim') NOT NULL DEFAULT 'Belum Dibayar',
+  `status` enum('Belum Dibayar','Dibayar','Dikirim','Dibatalkan','Pembayaran Invalid') NOT NULL DEFAULT 'Belum Dibayar',
   `resi_pengiriman` varchar(50) NOT NULL DEFAULT '-'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -226,8 +302,22 @@ CREATE TABLE `pesanan` (
 
 INSERT INTO `pesanan` (`id_pesanan`, `id_akun`, `tanggal`, `alamat`, `opsi_kirim`, `ongkos_kirim`, `status`, `resi_pengiriman`) VALUES
 (1, 2, '18-06-2021', 'Jalan Medan Binjai km 13,5', 'JNE', 7000, 'Belum Dibayar', '-'),
-(2, 3, '18-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Belum Dibayar', '-'),
-(3, 3, '19-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Belum Dibayar', '-');
+(2, 3, '18-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Dibayar', '-'),
+(3, 3, '19-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Pembayaran Invalid', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `pesananproduk`
+-- (See below for the actual view)
+--
+CREATE TABLE `pesananproduk` (
+`id_pesanan` int(5)
+,`nama` varchar(300)
+,`harga` int(8)
+,`jumlah_beli` int(4)
+,`total` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -248,7 +338,7 @@ CREATE TABLE `pesanan_detail` (
 
 INSERT INTO `pesanan_detail` (`id_detail_pesanan`, `id_pesanan`, `id_produk`, `jumlah_beli`) VALUES
 (5, 1, 2, 1),
-(6, 1, 1, 1),
+(6, 1, 1, 3),
 (7, 2, 1, 1),
 (8, 3, 3, 1);
 
@@ -429,11 +519,38 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Structure for view `detail_user_pesanan`
+--
+DROP TABLE IF EXISTS `detail_user_pesanan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `detail_user_pesanan`  AS  select `p`.`id_pesanan` AS `id_pesanan`,`a`.`id_akun` AS `id_akun`,`p`.`tanggal` AS `tanggal`,`a`.`nama` AS `nama`,`a`.`no_hp` AS `no_hp`,`a`.`email` AS `email`,`p`.`alamat` AS `alamat`,`p`.`ongkos_kirim` AS `ongkos_kirim`,`p`.`opsi_kirim` AS `opsi_kirim`,`p`.`status` AS `status`,`p`.`resi_pengiriman` AS `resi_pengiriman` from (`pesanan` `p` join `akun` `a` on(`p`.`id_akun` = `a`.`id_akun`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `listpesanan`
+--
+DROP TABLE IF EXISTS `listpesanan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listpesanan`  AS  select `p`.`id_akun` AS `id_akun`,`p`.`id_pesanan` AS `id_pesanan`,`p`.`tanggal` AS `tanggal`,`p`.`status` AS `status`,`p`.`ongkos_kirim` + sum(`hitung_harga_total`(`pd`.`id_produk`,`pd`.`jumlah_beli`)) AS `total_bayar` from (`pesanan` `p` join `pesanan_detail` `pd` on(`p`.`id_pesanan` = `pd`.`id_pesanan`)) group by `p`.`id_pesanan` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `listproduk`
 --
 DROP TABLE IF EXISTS `listproduk`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listproduk`  AS  select `p`.`id_produk` AS `id_produk`,`p`.`nama` AS `nama`,`m`.`merk` AS `merk`,`p`.`harga` AS `harga`,`p`.`ukuran` AS `ukuran`,`su`.`satuan` AS `satuan_ukuran`,`s`.`stok` AS `stok`,`s`.`diubah` AS `terakhir_diubah`,`sb`.`satuan` AS `satuan_barang`,`j`.`jenis` AS `jenis`,`p`.`deskripsi` AS `deskripsi`,`p`.`gambar` AS `gambar` from ((((((`produk` `p` join `produk_stok` `s` on(`p`.`id_produk` = `s`.`id_produk`)) join `produk_merk` `m` on(`p`.`id_merk` = `m`.`id_merk`)) join `produk_satuan_ukuran` `su` on(`p`.`satuan_ukuran` = `su`.`id_satuan_ukuran`)) join `produk_satuan_barang` `sb` on(`p`.`satuan_barang` = `sb`.`id_satuan_barang`)) join `produk_jenis` `pj` on(`pj`.`id_produk` = `p`.`id_produk`)) join `jenis_produk` `j` on(`pj`.`id_jenis` = `j`.`id_jenis`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pesananproduk`
+--
+DROP TABLE IF EXISTS `pesananproduk`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pesananproduk`  AS  select `pd`.`id_pesanan` AS `id_pesanan`,`p`.`nama` AS `nama`,`p`.`harga` AS `harga`,`pd`.`jumlah_beli` AS `jumlah_beli`,`hitung_harga_total`(`pd`.`id_produk`,`pd`.`jumlah_beli`) AS `total` from (`produk` `p` join `pesanan_detail` `pd` on(`p`.`id_produk` = `pd`.`id_produk`)) ;
 
 --
 -- Indexes for dumped tables
@@ -574,7 +691,7 @@ ALTER TABLE `log_produk_stok`
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
