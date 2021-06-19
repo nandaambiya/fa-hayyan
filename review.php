@@ -100,7 +100,7 @@ include 'koneksi.php';
 
 <div class="container">
   <div class="row">
-    <h2>Carousel Reviews</h2>
+    <h2>Reviews</h2>
   </div>
 </div>
 <div class="carousel-reviews broun-block">
@@ -243,6 +243,8 @@ include 'koneksi.php';
         </div>
     </div>
 </div>
+<br>
+<br>
   <!--container.//-->
   <?php include "footer.php"; ?>
 </body>

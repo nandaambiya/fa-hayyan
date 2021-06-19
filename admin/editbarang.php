@@ -19,44 +19,29 @@
 			<td><input required class="form-control" type="text" name="nama" value="<?php echo $data['nama_produk']; ?>"></td>
 		</tr>
 		<tr>
-			<td>Jenis</td>
+			<td>Satuan Jenis</td>
 			<td></td>
 			<td>
-				<select name="jenis" class="form-control" required>
-				  <?php if ($data['id_jenis'] == 1): ?>
-					<option value="1" selected>Masker</option>
-					<option value="2">Scrunchie - Biasa</option>
-					<option value="3">Scrunchie - Zipper</option>
-
-				  <?php elseif ($data['id_jenis'] == 2): ?>
-					<option value="1">Masker</option>
-					<option value="2" selected>Scrunchie - Biasa</option>
-					<option value="3">Scrunchie - Zipper</option>
-
-				  <?php else : ?>
-					<option value="1">Masker</option>
-					<option value="2">Scrunchie - Biasa</option>
-					<option value="3" selected>Scrunchie - Zipper</option>
-
-  				  <?php endif ?>
+				<select name="satuan_jenis" id="satuan_jenis" class="form-control" required>
+					<option value="" selected>JENIS</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Edisi</td>
+			<td>Satuan Ukuran</td>
 			<td></td>
 			<td>
-				<select name="edisi" id="edisi" class="form-control" required>
-					<option value="<?= $edisi['id_edisi'] ?>"><?= $edisi['edisi'] ?></option>
+				<select name="satuan_ukuran" id="satuan_ukuran" class="form-control" required>
+					<option value="" selected>SATUAN UKURAN</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Warna</td>
+			<td>Satuan Barang</td>
 			<td></td>
 			<td>
-				<select name="warna" id="warna" class="form-control" required>
-					<option value="<?= $warna['id_warna'] ?>" selected><?= $warna['warna'] ?></option>
+				<select name="satuan_barang" id="satuan_barang" class="form-control" required>
+					<option value="" selected>SATUAN BARANG</option>
 				</select>
 			</td>
 		</tr>
