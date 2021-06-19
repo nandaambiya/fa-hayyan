@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2021 at 05:52 PM
+-- Generation Time: Jun 19, 2021 at 10:36 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -80,7 +80,8 @@ CREATE TABLE `akun` (
 INSERT INTO `akun` (`id_akun`, `user_db`, `email`, `password`, `nama`, `alamat`, `kode_pos`, `no_hp`) VALUES
 (1, 1, 'admin@email.com', 'admin123', 'Admin', '-', '-', '081234567890'),
 (2, 2, 'arsya@example.com', '123456789', 'Arsya', 'Jalan Medan Binjai km 13,5, Jl. Setia I, Gg. Keluarga Dusun VII', '20351', '082275801234'),
-(3, 2, 'arsyfpro@email.com', '123456789', 'Arsya Pro', 'Jl. Medan-Binjai km 13,5', '20351', '081234567890');
+(3, 2, 'arsyfpro@email.com', '123456789', 'Arsya Pro', 'Jl. Medan-Binjai km 13,5', '20355', '081234567890'),
+(4, 2, 'anda@anda.com', '123456789', 'Anda Melinda', 'Jalan Kasuari No 78', '20351', '081234572547');
 
 --
 -- Triggers `akun`
@@ -110,9 +111,9 @@ DELIMITER ;
 
 CREATE TABLE `akun_db` (
   `id_akun_db` int(1) NOT NULL,
-  `akun` varchar(10) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `akun` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -120,8 +121,8 @@ CREATE TABLE `akun_db` (
 --
 
 INSERT INTO `akun_db` (`id_akun_db`, `akun`, `username`, `password`) VALUES
-(1, 'admin', 'admin', 'admin123'),
-(2, 'customer', 'customer', 'customer123');
+(1, 'admin fa-hayyan', 'admin_fa-hayyan', 'admin123'),
+(2, 'customer fa-hayyan', 'customer_fa-hayyan', 'customer123');
 
 -- --------------------------------------------------------
 
@@ -225,7 +226,9 @@ CREATE TABLE `log_edit_profil` (
 
 INSERT INTO `log_edit_profil` (`id_log_edit_profil`, `id_akun`, `nama_lama`, `nama_baru`, `alamat_lama`, `alamat_baru`, `kode_pos_lama`, `kode_pos_baru`, `no_hp_lama`, `no_hp_baru`, `waktu`) VALUES
 (1, 2, 'Arsya Fikri', 'Arsya', 'Jalan Medan Binjai km 13,5', 'Jalan Medan Binjai km 13,5, Jl. Setia I, Gg. Keluarga Dusun VII', '20351', '20351', '082275801234', '082275801234', '18-06-2021 23:34:12'),
-(2, 3, 'Arsya Pro', 'Arsya Pro', 'Jl. Johor Baru Medan Johor', 'Jl. Medan-Binjai km 13,5', '20351', '20351', '081234567890', '081234567890', '19-06-2021 01:20:00');
+(2, 3, 'Arsya Pro', 'Arsya Pro', 'Jl. Johor Baru Medan Johor', 'Jl. Medan-Binjai km 13,5', '20351', '20351', '081234567890', '081234567890', '19-06-2021 01:20:00'),
+(3, 3, 'Arsya Pro', 'Arsya Pro', 'Jl. Medan-Binjai km 13,5', 'Jl. Medan-Binjai km 13,5', '20351', '20355', '081234567890', '081234567890', '20-06-2021 02:27:08'),
+(4, 4, 'Anda Putra', 'Anda Melinda', 'Jalan Kasuari No 69', 'Jalan Kasuari No 78', '20321', '20351', '081234578955', '081234572547', '20-06-2021 03:00:50');
 
 -- --------------------------------------------------------
 
@@ -255,7 +258,10 @@ INSERT INTO `log_produk_stok` (`id_log_produk_stok`, `id_produk`, `aksi`, `stok_
 (22, 3, 'Pengurangan', 20, 0, '18-06-2021 19:16:56'),
 (23, 3, 'Penambahan', 0, 3, '18-06-2021 20:17:45'),
 (24, 1, 'Pengurangan', 25, 24, '19-06-2021 02:48:17'),
-(25, 3, 'Pengurangan', 3, 2, '19-06-2021 02:58:37');
+(25, 3, 'Pengurangan', 3, 2, '19-06-2021 02:58:37'),
+(26, 1, 'Pengurangan', 24, 23, '20-06-2021 02:43:06'),
+(27, 3, 'Pengurangan', 2, 0, '20-06-2021 02:43:06'),
+(28, 2, 'Pengurangan', 14, 13, '20-06-2021 02:57:10');
 
 -- --------------------------------------------------------
 
@@ -277,7 +283,9 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`id_pembayaran`, `id_pesanan`, `pembayar`, `tanggal`, `metode`, `bukti`) VALUES
-(1, 2, 'Ilham', '19-06-2021', 'OVO', '19062021162609_nopem_2_4e0b8f4dccd1d54255060000.jpg');
+(1, 2, 'Ilham', '19-06-2021', 'OVO', '19062021162609_nopem_2_4e0b8f4dccd1d54255060000.jpg'),
+(2, 4, 'Fendi', '19-06-2021', 'Gopay', '19062021220710_nopem_4_4e0b8f4dccd1d54255060000.jpg'),
+(3, 5, 'Melinda', '19-06-2021', 'Dana', '19062021215737_nopem_5_typesofinheritance.jpg');
 
 -- --------------------------------------------------------
 
@@ -303,7 +311,9 @@ CREATE TABLE `pesanan` (
 INSERT INTO `pesanan` (`id_pesanan`, `id_akun`, `tanggal`, `alamat`, `opsi_kirim`, `ongkos_kirim`, `status`, `resi_pengiriman`) VALUES
 (1, 2, '18-06-2021', 'Jalan Medan Binjai km 13,5', 'JNE', 7000, 'Belum Dibayar', '-'),
 (2, 3, '18-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Dibayar', '-'),
-(3, 3, '19-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Pembayaran Invalid', '-');
+(3, 3, '19-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Pembayaran Invalid', '-'),
+(4, 4, '20-06-2021', 'Jalan Kasuari No 69, Kota Aceh Barat Daya, Nanggroe Aceh Darussalam (NAD), 20321', 'Jalur Nugraha Ekakurir (JNE), REG', 27000, 'Dibayar', '-'),
+(5, 4, '20-06-2021', 'Jalan Kasuari No 69, Kota Aceh Barat Daya, Nanggroe Aceh Darussalam (NAD), 20321', 'Jalur Nugraha Ekakurir (JNE), REG', 27000, 'Belum Dibayar', '-');
 
 -- --------------------------------------------------------
 
@@ -340,7 +350,10 @@ INSERT INTO `pesanan_detail` (`id_detail_pesanan`, `id_pesanan`, `id_produk`, `j
 (5, 1, 2, 1),
 (6, 1, 1, 3),
 (7, 2, 1, 1),
-(8, 3, 3, 1);
+(8, 3, 3, 1),
+(9, 4, 1, 1),
+(10, 4, 3, 2),
+(11, 5, 2, 1);
 
 --
 -- Triggers `pesanan_detail`
@@ -477,9 +490,9 @@ CREATE TABLE `produk_stok` (
 --
 
 INSERT INTO `produk_stok` (`id_stok`, `id_produk`, `stok`, `diubah`) VALUES
-(1, 1, 24, '19-06-2021 02:48:17'),
-(3, 2, 14, '18-06-2021 18:17:02'),
-(5, 3, 2, '19-06-2021 02:58:37');
+(1, 1, 23, '20-06-2021 02:43:06'),
+(3, 2, 13, '20-06-2021 02:57:10'),
+(5, 3, 0, '20-06-2021 02:43:06');
 
 --
 -- Triggers `produk_stok`
@@ -661,7 +674,7 @@ ALTER TABLE `produk_stok`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_akun` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `akun_db`
@@ -679,31 +692,31 @@ ALTER TABLE `jenis_produk`
 -- AUTO_INCREMENT for table `log_edit_profil`
 --
 ALTER TABLE `log_edit_profil`
-  MODIFY `id_log_edit_profil` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_log_edit_profil` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `log_produk_stok`
 --
 ALTER TABLE `log_produk_stok`
-  MODIFY `id_log_produk_stok` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_log_produk_stok` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pembayaran` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pesanan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pesanan_detail`
 --
 ALTER TABLE `pesanan_detail`
-  MODIFY `id_detail_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_detail_pesanan` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `produk`

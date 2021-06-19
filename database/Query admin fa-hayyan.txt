@@ -1,0 +1,3 @@
+GRANT USAGE ON *.* TO `admin_fa-hayyan`@`localhost` IDENTIFIED BY PASSWORD '*01A6717B58FF5C7EAFFF6CB7C96F7428EA65FE4C';
+
+GRANT ALL PRIVILEGES ON `fa-hayyan`.* TO `admin_fa-hayyan`@`localhost`;

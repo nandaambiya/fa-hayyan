@@ -1,0 +1,19 @@
+GRANT USAGE ON *.* TO `customer_fa-hayyan`@`localhost` IDENTIFIED BY PASSWORD '*B1952B252B5963C480D1E8C04E89CB950F048185';
+
+GRANT SELECT ON `fa-hayyan`.`listpesanan` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT SELECT ON `fa-hayyan`.`listproduk` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT INSERT ON `fa-hayyan`.`pesanan_detail` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT SELECT, INSERT, UPDATE ON `fa-hayyan`.`pesanan` TO `customer_fa-hayyan`@`localhost` WITH GRANT OPTION;
+
+GRANT SELECT ON `fa-hayyan`.`pesananproduk` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT SELECT, INSERT, UPDATE ON `fa-hayyan`.`pembayaran` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT SELECT ON `fa-hayyan`.`detail_user_pesanan` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT SELECT, INSERT, UPDATE ON `fa-hayyan`.`akun` TO `customer_fa-hayyan`@`localhost`;
+
+GRANT EXECUTE ON PROCEDURE `fa-hayyan`.`cariproduk` TO `customer_fa-hayyan`@`localhost`;
