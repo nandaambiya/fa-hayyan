@@ -18,7 +18,7 @@ body {
 
  #wrapper {
     width: 100%;
-    background:#202020;
+    background:#2a351f;
 }
 
 #page-wrapper {
@@ -251,7 +251,7 @@ font-weight: 700;
 }
 .sidebar-collapse .nav > li > a {
 	color:#fff;
-	background:#202020;
+	background:#2a351f;
 	text-shadow:none;
 	
 }
@@ -264,7 +264,7 @@ font-weight: 700;
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
 	
-	background:#0A0A0A;
+	background:#5d8975;
 	outline:0;
 }
 
@@ -321,7 +321,7 @@ border:0px solid black;
      
 }
 .navbar-header {
-    background: #A70303;
+    background: #5d8975;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 background-color: #B40101;

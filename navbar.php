@@ -81,6 +81,11 @@
           <img src="icon/People2.png" height="30">
         </a>
       </li>
+      <li class="nav-item">
+        <a href="review.php" class="nav-link navbar-link-2 waves-effect">
+          <img src="icon/comment.png" height="20">
+        </a>
+      </li>
     </ul>
     </ul>
 

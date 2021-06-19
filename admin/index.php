@@ -38,7 +38,7 @@ if (!isset($_SESSION['admin'])) {
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0; background: #2a351f;">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0; background: #5d8975;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse" >
                     <span class="sr-only">Toggle navigation</span>
@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin'])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" style="background: #2a351f;" href="index.php">
+                <a class="navbar-brand" style="background: #5d8975;" href="index.php">
                 <img src="../icon/logo_obat1.png" height="30"> </a>
             </div>
   <div style="color: black;
