@@ -9,19 +9,16 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
-<h2>Ukuran Barang</h2>
+<h2>Manajemen Satuan Barang</h2>
 <br>
-<a class="btn btn-info" href="index.php?halaman=satuan_ukuran_tambah">Tambah Data</a>
+<a class="btn btn-info" href="index.php?halaman=satuan_barang_tambah">Tambah Data</a>
 <br>
 <br>
 <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th width="30">No</th>
-            <th>Nama Produk</th>
-            <th>Harga</th>
-            <th>Besar Produk</th>
-            <th>Satuan Ukuran</th>
+            <th>Satuan Barang</th>
             <th width="50"></th>
         </tr>
     </thead>
@@ -29,12 +26,9 @@
     
         <tr>
             <td>1</td>
-            <td>Betadine</td>
-            <td>12.000</td>
-            <td>20</td>
-            <td>Gr</td>
-            <td><a class="btn btn-sm btn-info" href="$ro?halaman=editbarang&id=<?= w['id_produk'] ?>"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-sm btn-danger" href="hapusbarang.php?id=<?= $row['id_produk'] ?>" onclick="return confirm('Yakin ingin menghapus produk ini?')"><i class="fa fa-trash-o"></i></a>
+            <td>Tube</td>
+            <td><a class="btn btn-sm btn-info" href="index.php?halaman=satuan_barang_ubah"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger" href="index.php?halaman=satuan_barang_hapus" onclick="return confirm('Yakin ingin menghapus produk ini?')"><i class="fa fa-trash-o"></i></a>
             </td>
         </tr>
    

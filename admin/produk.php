@@ -21,7 +21,6 @@
 			<th>Foto</th>
 			<th>Nama</th>
             <th>Jenis</th>
-            <th>Warna</th>
 			<th>Harga (Rp)</th>
 			<th>Stok</th>
             <th width="50"></th>
@@ -41,7 +40,6 @@
             <td><img style="width: 100px" src="../image/<?= $row['foto_produk'] ?>"></td>
             <td><?= $row['nama_produk'] ?></td>
             <td><?= $datajenis['jenis'] ?></td>
-            <td><?= $datawarna['warna'] ?></td>
             <td><?= number_format($row['harga_produk']) ?></td>
             <td><?= number_format($row['stok_produk']) ?></td>
             <td><a class="btn btn-sm btn-info" href="?halaman=editbarang&id=<?= $row['id_produk'] ?>"><i class="fa fa-pencil"></i></a>

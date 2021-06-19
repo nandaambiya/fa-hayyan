@@ -14,32 +14,33 @@
 			<td>Jenis</td>
 			<td></td>
 			<td>
-				<select name="jenis" class="form-control" required>
+				<select name="satuan_jenis" id="satuan_jenis" class="form-control" required>
 					<option value="">Pilih Jenis</option>
-					<option value="1">Masker</option>
+<!-- 					<option value="1">Masker</option>
 					<option value="2">Scrunchie - Biasa</option>
-					<option value="3">Scrunchie - Zipper</option>
+					<option value="3">Scrunchie - Zipper</option> -->
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Edisi</td>
+			<td>Satuan Ukuran</td>
 			<td></td>
 			<td>
-				<select name="edisi" id="edisi" class="form-control" required>
-					<option value="">Pilih Edisi</option>
+				<select name="satuan_ukuran" id="satuan_ukuran" class="form-control" required>
+					<option value="">Pilih Satuan Ukuran</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Warna</td>
+			<td>Satuan Barang</td>
 			<td></td>
 			<td>
-				<select name="warna" id="warna" class="form-control" required>
-					<option value="">Pilih Warna</option>
+				<select name="satuan_barang" id="satuan_barang" class="form-control" required>
+					<option value="">Pilih Satuan Barang</option>
 				</select>
 			</td>
 		</tr>
+
 		<tr>
 			<td>Harga (Rp)</td>
 			<td></td>

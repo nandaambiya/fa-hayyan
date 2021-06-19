@@ -159,7 +159,7 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                         include 'satuan_jenis.php';
                     }
                      elseif ($_GET['halaman']=="satuan_jenis_tambah"){
-                        include 'satuan_ukuran_jenis_tambah.php';
+                        include 'satuan_jenis_tambah.php';
                     }
                       elseif ($_GET['halaman']=="satuan_jenis_ubah"){
                         include 'satuan_jenis_ubah.php';
