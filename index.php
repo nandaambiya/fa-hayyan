@@ -66,28 +66,28 @@ include 'koneksi.php';
       <h5 class="grey-text w-responsive mx-auto mb-5">Fa Hayyan is a pharmacy with complete and best products and will certainly make it easier for you to buy medicine.</h5>
       <br><br>
       <!-- Section heading -->
-      <h3 class="font-weight-bold mb-4 pb-2">Special for you</h3>
+      <h3 class="font-weight-bold mb-4 pb-2">Produk yang kami jual</h3>
       <!-- Section description -->
 
 
       <div class="row">
         <?php
-        $queryambil = $koneksi->query("SELECT id_produk, id_warna, nama_produk, harga_produk, foto_produk, stok_produk FROM produk WHERE stok_produk > 0 ORDER BY rand() LIMIT 6");
+        $queryambil = $koneksi->query("SELECT id_produk, nama, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY rand() LIMIT 9");
 
         while ($data = $queryambil->fetch_assoc()) {
         ?>
           <div class="col-md-4" style="padding: 40px;">
             <figure class="card card-product">
               <a href="detail.php?id=<?php echo $data['id_produk'] ?>" style="color: inherit; text-decoration: none;">
-                <div class="img-wrap"><img src="image/<?= $data['foto_produk'] ?>"></div>
+                <div class="img-wrap"><img src="image/<?= $data['gambar'] ?>"></div>
                 <figcaption class="info-wrap">
-                  <h6 class="title"><?= $data['nama_produk'] ?></h6>
+                  <h6 class="title"><?= $data['nama'] ?></h6>
                 </figcaption>
               </a>
               <div class="bottom-wrap">
 
                 <div class="price-wrap h5">
-                  <span class="price-new">Rp <?= number_format($data['harga_produk']) ?>,-</span>
+                  <span class="price-new">Rp <?= number_format($data['harga']) ?>,-</span>
                 </div> <!-- price-wrap.// -->
               </div>
               <div class="bottom-wrap">
@@ -101,7 +101,7 @@ include 'koneksi.php';
 
       <br><br>
 
-      <h4>Check all of them out <a href="allstuff.php">here!</a></h4>
+      <h4>Lihat semuanya <a href="allstuff.php">di sini!</a></h4>
     </section>
   </div>
   <!--container.//-->

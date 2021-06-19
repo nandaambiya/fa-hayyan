@@ -239,8 +239,8 @@
 				$koneksi->rollback();
 				echo  '<script type="text/javascript">
 	                        swal({title: "Checkout Gagal!", 
-	                          text: "Yuk, segera lakukan pembayaran!", 
-	                          icon: "success"
+	                          text: "Terjadi kesalahan!", 
+	                          icon: "error"
 	                        }).then(function() {
 	                          window.location = "keranjang.php";
 	                        });

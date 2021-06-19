@@ -11,17 +11,17 @@ elseif (!isset($_SESSION['customer']) OR empty($_SESSION['customer'])) {
   echo "<script>location='login.php';</script>";
 }
 
-$datauser = $koneksi->query("SELECT a.id_akun FROM akun a JOIN pesanan p ON a.id_akun = p.id_akun WHERE p.id_pesanan = '$_GET[id]'")->fetch_assoc();
+$id_pesanan = $_GET['id'];
 
-if ($datauser['id_akun'] != $_SESSION['customer']['id_akun']) {
+$datapesanan = $koneksi->query("SELECT id_akun, status FROM detail_user_pesanan WHERE id_pesanan = '$id_pesanan'")->fetch_assoc();
+
+if ($datapesanan['id_akun'] != $_SESSION['customer']['id_akun']) {
 		echo "<script>location='login.php'</script>";
 }
 
-$databayar = $koneksi->query("SELECT status_pesanan FROM pesanan WHERE id_pesanan = '$_GET[id]'")->fetch_assoc();
-
-if ($databayar['status_pesanan'] != "Pembayaran Invalid" && $databayar['status_pesanan'] != "Menunggu Pembayaran") {
-	echo "<script>alert('Anda telah Mengirimkan Bukti Pembayaran')</script>";
-    echo "<script>location='riwayatbelanja.php';</script>";
+if ($datapesanan['status'] != "Pembayaran Invalid" && $datapesanan['status'] != "Belum Dibayar") {
+	  echo "<script>alert('Anda telah Mengirimkan Bukti Pembayaran')</script>";
+    echo "<script>location='riwayat.php';</script>";
 }
 
 ?>
@@ -59,7 +59,7 @@ if ($databayar['status_pesanan'] != "Pembayaran Invalid" && $databayar['status_p
         <h2>Konfirmasi Pembayaran</h2>
         <br>
         <p>
-          Kirim Bukti Pembayaran untuk <b><a class="btn btn-sm btn-kustom" href="nota.php?id=<?= $_GET['id'] ?>">Order #<?= $_GET['id'] ?></a></b>
+          Kirim Bukti Pembayaran untuk <b><a class="btn btn-sm btn-kustom" href="nota.php?id=<?= $id_pesanan ?>">Pesanan #<?= $id_pesanan ?></a></b>
         </p>
         <div class="alert alert-info">Total Tagihan <strong>Rp <?= number_format($_GET['tagihan']) ?>,-</strong></div>
         <form method="post" enctype="multipart/form-data">
@@ -71,9 +71,10 @@ if ($databayar['status_pesanan'] != "Pembayaran Invalid" && $databayar['status_p
             <label>Metode Pembayaran</label>
             <select class="form-control" name="metode" required>
               <option value="">--Pilih Metode--</option>
-              <option value="Bank BNI">Transfer Bank BNI</option>
+              <option value="BNI">Transfer Bank BNI</option>
+              <option value="Gopay">Gopay</option>
               <option value="OVO">OVO</option>
-              <option value="DANA">DANA</option>
+              <option value="Dana">DANA</option>
             </select>
           </div>
          <div class="form-group">
@@ -98,39 +99,55 @@ if ($databayar['status_pesanan'] != "Pembayaran Invalid" && $databayar['status_p
 
 		if (isset($_POST['kirim'])) {
 			$formatfoto = pathinfo($_FILES['bukti']['name'], PATHINFO_EXTENSION);
-      		$ukuranfoto = $_FILES['bukti']['size'];
-      		$namabukti = date('dmYHis')."_nopem_".$_GET['id']."_".$_FILES['bukti']['name'];
+  		$ukuranfoto = $_FILES['bukti']['size'];
+  		$namabukti = date('dmYHis')."_nopem_".$id_pesanan."_".$_FILES['bukti']['name'];
 
-      		$nama_pembayar = $_POST['nama'];
-      		$metode_bayar = $_POST['metode'];
-      		$tanggal  =date('d-m-Y');
+  		$nama_pembayar = $_POST['nama'];
+  		$metode_bayar = $_POST['metode'];
+  		$tanggal  =date('d-m-Y');
 
       		if(($ukuranfoto <= 5000000) && ($formatfoto == "jpg" || $formatfoto == "jpeg")){
-      			$querycek = $koneksi->query("SELECT id_pesanan FROM pembayaran WHERE id_pesanan = '$_GET[id]'");
+      			$querycek = $koneksi->query("SELECT id_pesanan FROM pembayaran WHERE id_pesanan = '$id_pesanan'");
       			$adadata = $querycek->num_rows;
 
-      			if ($adadata == 0) {
-      				$koneksi->query("INSERT INTO pembayaran (id_pesanan, nama_pembayar, metode_bayar, tanggal, bukti_pembayaran)
-      									VALUES ('$_GET[id]', '$nama_pembayar', '$metode_bayar', '$tanggal', '$namabukti')");
-      			}
-      			elseif ($adadata > 0) {
-      				$koneksi->query("UPDATE pembayaran SET nama_pembayar = '$nama_pembayar', metode_bayar = '$metode_bayar', tanggal = '$tanggal', bukti_pembayaran = '$namabukti' WHERE id_pesanan = '$_GET[id]'");
-      			}
+            try {
+              $koneksi->begin_transaction();
 
-      			$lokasibukti = $_FILES['bukti']['tmp_name'];
-          		$lokasisimpan = "admin/foto_bukti_bayar/";
-          		move_uploaded_file($lokasibukti, $lokasisimpan.$namabukti);
+        			if ($adadata == 0) {
+        				$koneksi->query("INSERT INTO pembayaran (id_pesanan, pembayar, tanggal, metode, bukti)
+        									VALUES ('$id_pesanan', '$nama_pembayar', '$tanggal', '$metode_bayar', '$namabukti')");
+        			}
+        			elseif ($adadata > 0) {
+        				$koneksi->query("UPDATE pembayaran SET pembayar = '$nama_pembayar', metode = '$metode_bayar', tanggal = '$tanggal', bukti = '$namabukti' WHERE id_pesanan = '$id_pesanan'");
+        			}
 
-      			$koneksi->query("UPDATE pesanan SET status_pesanan = 'Verifikasi Pembayaran' WHERE id_pesanan = '$_GET[id]'");
+        			$lokasibukti = $_FILES['bukti']['tmp_name'];
+            	$lokasisimpan = "admin/foto_bukti_bayar/";
+            	move_uploaded_file($lokasibukti, $lokasisimpan.$namabukti);
 
-      			echo  '<script type="text/javascript">
-                        swal({title: "Pembayaran Berhasil!", 
-                          text: "Harap menunggu hingga pembayaran diverifikasi.", 
-                          icon: "success"
-                        }).then(function() {
-                          window.location = "nota.php?id='.$_GET['id'].'";
-                        });
-                     </script>';
+        			$koneksi->query("UPDATE pesanan SET status = 'Dibayar' WHERE id_pesanan = '$id_pesanan'");
+
+              $koneksi->commit();
+
+        			echo  '<script type="text/javascript">
+                          swal({title: "Pembayaran Berhasil!", 
+                            text: "Harap menunggu hingga pembayaran diverifikasi.", 
+                            icon: "success"
+                          }).then(function() {
+                            window.location = "nota.php?id='.$id_pesanan.'";
+                          });
+                       </script>';
+            } catch (Exception $e) {
+              $koneksi->rollback();
+              echo  '<script type="text/javascript">
+                                swal({title: "Checkout Gagal!", 
+                                  text: "Terjadi kesalahan!", 
+                                  icon: "error"
+                                }).then(function() {
+                                  window.location = "keranjang.php";
+                                });
+                             </script>';
+            }
       		}
       		else{
       			echo  '<script type="text/javascript">
@@ -138,7 +155,7 @@ if ($databayar['status_pesanan'] != "Pembayaran Invalid" && $databayar['status_p
                           text: "Harap unggah foto sesuai format!", 
                           icon: "error"
                         }).then(function() {
-                          window.location = "?id='.$_GET['id'].'&tagihan='.$_GET['tagihan'].'";
+                          window.location = "?id='.$id_pesanan.'&tagihan='.$_GET['tagihan'].'";
                         });
                      </script>';
       		}

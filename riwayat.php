@@ -50,7 +50,7 @@ else if (!isset($_SESSION['customer']) OR empty($_SESSION['customer'])) {
 			<table id="tabel-data" width="100%" class="table table-hover">
 			  <thead>
 			    <tr>
-			      <th>Order</th>
+			      <th>Nomor Pesanan</th>
 			      <th>Tanggal</th>
 			      <th>Status Pembayaran</th>
 			      <th>Total</th>
@@ -60,15 +60,15 @@ else if (!isset($_SESSION['customer']) OR empty($_SESSION['customer'])) {
 			  	<?php
 			  		$id_akun = $_SESSION['customer']['id_akun'];
 
-			  		$queryambil = $koneksi->query("SELECT id_pesanan, tanggal_pesan, status_pesanan, subtotal_produk, subtotal_pengiriman FROM pesanan WHERE id_akun = '$id_akun'");
+			  		$queryambil = $koneksi->query("SELECT * FROM listpesanan WHERE id_akun = '$id_akun'");
 
 			  		while ($data = $queryambil->fetch_assoc()) {
 			  	?>
 			    <tr>
 			    	<td><a href="nota.php?id=<?= $data['id_pesanan'] ?>" class="btn btn-kustom">#<?= $data['id_pesanan'] ?></a></td>
-			    	<td><?= $data['tanggal_pesan'] ?></td>
-			    	<td><?= $data['status_pesanan'] ?></td>
-			    	<td>Rp <?= number_format($data['subtotal_produk'] + $data['subtotal_pengiriman']) ?></td>
+			    	<td><?= $data['tanggal'] ?></td>
+			    	<td><?= $data['status'] ?></td>
+			    	<td>Rp <?= number_format($data['total_bayar']) ?></td>
 			    </tr>
 				<?php } ?>
 

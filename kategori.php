@@ -104,7 +104,7 @@ include 'koneksi.php';
               </figcaption>
               <div class="bottom-wrap">
                 <div class="price-wrap h5 float-left">
-                  <span class="price-new">Rp <?php echo number_format($data['harga']); ?>,00</span>
+                  <span class="price-new">Rp <?php echo number_format($data['harga']); ?>,-</span>
                 </div> <!-- price-wrap.// -->
               </div>
               <div class="bottom-wrap" style="align-self: initial;">
