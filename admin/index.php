@@ -65,6 +65,7 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     <li><a href="index.php?halaman=satuan_ukuran">Satuan Ukuran</a></li>
                     <li><a href="index.php?halaman=satuan_barang">Satuan Barang</a></li>
                     <li><a href="index.php?halaman=satuan_jenis">Satuan Jenis</a></li>
+                    <li><a href="index.php?halaman=satuan_merk">Merk Produk</a></li>
                 </ul>
                
             </div>
@@ -160,6 +161,18 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     }
                       elseif ($_GET['halaman']=="satuan_jenis_hapus"){
                         include 'satuan_jenis_hapus.php';
+                    }
+                    elseif ($_GET['halaman']=="satuan_merk"){
+                        include 'satuan_merk.php';
+                    }
+                     elseif ($_GET['halaman']=="satuan_merk_tambah"){
+                        include 'satuan_merk_tambah.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_merk_ubah"){
+                        include 'satuan_merk_ubah.php';
+                    }
+                      elseif ($_GET['halaman']=="satuan_merk_hapus"){
+                        include 'satuan_merk_hapus.php';
                     }
                 }
                 else{

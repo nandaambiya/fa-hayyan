@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include 'koneksi.php';
 
 $ambil = $koneksi->query("SELECT * FROM produk_satuan_barang WHERE id_satuan_barang='$_GET[id]'");

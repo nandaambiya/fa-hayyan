@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include 'koneksi.php';
 
 $ambil = $koneksi->query("SELECT * FROM jenis_produk WHERE id_jenis='$_GET[id]'");
