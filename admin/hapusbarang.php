@@ -1,10 +1,13 @@
 <?php
+session_start();
 
 include 'koneksi.php';
 
-$ambil = $koneksi->query("SELECT * FROM produk WHERE id_produk='$_GET[id]'");
+$id_produk = $_GET['id'];
+
+$ambil = $koneksi->query("SELECT gambar FROM produk WHERE id_produk='$id_produk'");
 $data = $ambil->fetch_assoc();
-$foto = $data['foto_produk'];
+$foto = $data['gambar'];
 
 if (file_exists("../image/produk/$foto"))
 {
@@ -12,7 +15,7 @@ if (file_exists("../image/produk/$foto"))
 }
 
 
-$koneksi->query("DELETE FROM produk WHERE id_produk='$_GET[id]'");
+$koneksi->query("DELETE FROM produk WHERE id_produk='$id_produk'");
 
 echo "<script>alert('Barang Dihapus!');</script>";
 echo "<script>location='index.php?halaman=produk';</script>";

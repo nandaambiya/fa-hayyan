@@ -52,7 +52,7 @@
             <td><?= number_format($row['harga']) ?></td>
             <td><?= number_format($row['stok']) ?></td>
             <td><a class="btn btn-sm btn-info" href="?halaman=editbarang&id=<?= $row['id_produk'] ?>"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-sm btn-success" href="#">Riwayat Stok</a>
+                <a class="btn btn-sm btn-success" href="?halaman=riwayat_stok&id=<?= $row['id_produk'] ?>&nama=<?= $row['nama'] ?>">Riwayat Stok</a>
                 <a class="btn btn-sm btn-danger" href="hapusbarang.php?id=<?= $row['id_produk'] ?>" onclick="return confirm('Yakin ingin menghapus produk ini?')"><i class="fa fa-trash-o"></i></a>
             </td>
         </tr>

@@ -58,14 +58,13 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="index.php?halaman=produk">Produk</a></li>
-                    <li><a href="index.php?halaman=produk_edisi">&nbsp;&nbsp;↳ Daftar Edisi - Produk</a></li>
                     <li><a href="index.php?halaman=pesanan">Pesanan</a></li>
                     <li><a href="index.php?halaman=user">Akun Customer</a></li>
-                    <li><a href="index.php?halaman=satuan_ukuran">Satuan Ukuran</a></li>
-                    <li><a href="index.php?halaman=satuan_barang">Satuan Barang</a></li>
-                    <li><a href="index.php?halaman=satuan_jenis">Satuan Jenis</a></li>
-                    <li><a href="index.php?halaman=satuan_merk">Merk Produk</a></li>
+                    <li><a href="index.php?halaman=produk">Produk</a></li>
+                    <li><a href="index.php?halaman=satuan_ukuran">&nbsp;&nbsp;↳Satuan Ukuran</a></li>
+                    <li><a href="index.php?halaman=satuan_barang">&nbsp;&nbsp;↳Satuan Barang</a></li>
+                    <li><a href="index.php?halaman=satuan_jenis">&nbsp;&nbsp;↳Satuan Jenis</a></li>
+                    <li><a href="index.php?halaman=satuan_merk">&nbsp;&nbsp;↳Merk Produk</a></li>
                 </ul>
                
             </div>
@@ -95,6 +94,10 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     {
                         include 'user.php';
                     }
+                    elseif ($_GET['halaman']=="riwayat_profil")
+                    {
+                        include 'riwayat_profil.php';
+                    }
                     elseif ($_GET['halaman']=="detail")
                     {
                         include 'detail.php';
@@ -110,6 +113,9 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                      elseif ($_GET['halaman']=="editbarang")
                     {
                         include 'editbarang.php';
+                    }elseif ($_GET['halaman']=="riwayat_stok")
+                    {
+                        include 'riwayat_stok.php';
                     }
                     elseif ($_GET['halaman']=="hapususer")
                     {

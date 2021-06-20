@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2021 at 10:36 PM
+-- Generation Time: Jun 20, 2021 at 06:51 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -81,11 +81,46 @@ INSERT INTO `akun` (`id_akun`, `user_db`, `email`, `password`, `nama`, `alamat`,
 (1, 1, 'admin@email.com', 'admin123', 'Admin', '-', '-', '081234567890'),
 (2, 2, 'arsya@example.com', '123456789', 'Arsya', 'Jalan Medan Binjai km 13,5, Jl. Setia I, Gg. Keluarga Dusun VII', '20351', '082275801234'),
 (3, 2, 'arsyfpro@email.com', '123456789', 'Arsya Pro', 'Jl. Medan-Binjai km 13,5', '20355', '081234567890'),
-(4, 2, 'anda@anda.com', '123456789', 'Anda Melinda', 'Jalan Kasuari No 78', '20351', '081234572547');
+(4, 2, 'anda@anda.com', '123456789', 'Anda Melinda', 'Jalan Kasuari No 78', '20352', '0812784565'),
+(7, 2, 'email@email.com', '123456789', 'Fikri', 'Jalan Medan-Binjai', '20351', '08122130254');
 
 --
 -- Triggers `akun`
 --
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_email_insert` BEFORE INSERT ON `akun` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM akun WHERE email = NEW.email)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_email_update` BEFORE UPDATE ON `akun` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM akun WHERE email = NEW.email)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `check_kode_pos_no_hp` BEFORE INSERT ON `akun` FOR EACH ROW BEGIN
+	IF (NEW.kode_pos REGEXP '^[0-9]*$' = 0 OR NEW.no_hp REGEXP '^[0-9]*$' = 0) THEN
+    SIGNAL SQLSTATE '45000'
+     SET MESSAGE_TEXT = 'Kode Pos dan Nomor HP harus berupa angka!';
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `check_update_kode_pos_no_hp` BEFORE UPDATE ON `akun` FOR EACH ROW BEGIN
+	IF (NEW.kode_pos REGEXP '^[0-9]*$' = 0 OR NEW.no_hp REGEXP '^[0-9]*$' = 0) THEN
+    SIGNAL SQLSTATE '45000'
+     SET MESSAGE_TEXT = 'Kode Pos dan Nomor HP harus berupa angka!';
+    END IF;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `insert_log_update_profil` BEFORE UPDATE ON `akun` FOR EACH ROW BEGIN
 INSERT INTO log_edit_profil
@@ -163,7 +198,28 @@ INSERT INTO `jenis_produk` (`id_jenis`, `jenis`) VALUES
 (1, 'Obat Kumur'),
 (2, 'Obat Bebas Terbatas'),
 (3, 'Obat Keras'),
-(4, 'Salep');
+(4, 'Salep'),
+(6, 'Obat Batuk');
+
+--
+-- Triggers `jenis_produk`
+--
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_jenis_insert` BEFORE INSERT ON `jenis_produk` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM jenis_produk WHERE jenis = NEW.jenis)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_jenis_update` BEFORE UPDATE ON `jenis_produk` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM jenis_produk WHERE jenis = NEW.jenis)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -228,7 +284,9 @@ INSERT INTO `log_edit_profil` (`id_log_edit_profil`, `id_akun`, `nama_lama`, `na
 (1, 2, 'Arsya Fikri', 'Arsya', 'Jalan Medan Binjai km 13,5', 'Jalan Medan Binjai km 13,5, Jl. Setia I, Gg. Keluarga Dusun VII', '20351', '20351', '082275801234', '082275801234', '18-06-2021 23:34:12'),
 (2, 3, 'Arsya Pro', 'Arsya Pro', 'Jl. Johor Baru Medan Johor', 'Jl. Medan-Binjai km 13,5', '20351', '20351', '081234567890', '081234567890', '19-06-2021 01:20:00'),
 (3, 3, 'Arsya Pro', 'Arsya Pro', 'Jl. Medan-Binjai km 13,5', 'Jl. Medan-Binjai km 13,5', '20351', '20355', '081234567890', '081234567890', '20-06-2021 02:27:08'),
-(4, 4, 'Anda Putra', 'Anda Melinda', 'Jalan Kasuari No 69', 'Jalan Kasuari No 78', '20321', '20351', '081234578955', '081234572547', '20-06-2021 03:00:50');
+(4, 4, 'Anda Putra', 'Anda Melinda', 'Jalan Kasuari No 69', 'Jalan Kasuari No 78', '20321', '20351', '081234578955', '081234572547', '20-06-2021 03:00:50'),
+(7, 4, 'Anda Melinda', 'Anda Melinda', 'Jalan Kasuari No 78', 'Jalan Kasuari No 78', '20351', '20352', '081234572547', '081234572547', '20-06-2021 15:44:55'),
+(9, 4, 'Anda Melinda', 'Anda Melinda', 'Jalan Kasuari No 78', 'Jalan Kasuari No 78', '20352', '20352', '081234572547', '0812784565', '20-06-2021 15:45:10');
 
 -- --------------------------------------------------------
 
@@ -239,7 +297,7 @@ INSERT INTO `log_edit_profil` (`id_log_edit_profil`, `id_akun`, `nama_lama`, `na
 CREATE TABLE `log_produk_stok` (
   `id_log_produk_stok` int(10) NOT NULL,
   `id_produk` int(4) NOT NULL,
-  `aksi` enum('Penambahan','Pengurangan','Barang Baru') NOT NULL,
+  `aksi` enum('Penambahan','Pengurangan','Stok Baru') NOT NULL,
   `stok_lama` int(4) NOT NULL,
   `stok_baru` int(4) NOT NULL,
   `timestamp` char(19) NOT NULL
@@ -254,14 +312,18 @@ INSERT INTO `log_produk_stok` (`id_log_produk_stok`, `id_produk`, `aksi`, `stok_
 (18, 2, 'Pengurangan', 15, 14, '18-06-2021 18:17:02'),
 (19, 1, 'Pengurangan', 22, 21, '18-06-2021 18:17:02'),
 (20, 1, 'Penambahan', 21, 25, '18-06-2021 18:33:47'),
-(21, 3, 'Barang Baru', 0, 20, '18-06-2021 19:16:32'),
+(21, 3, '', 0, 20, '18-06-2021 19:16:32'),
 (22, 3, 'Pengurangan', 20, 0, '18-06-2021 19:16:56'),
 (23, 3, 'Penambahan', 0, 3, '18-06-2021 20:17:45'),
 (24, 1, 'Pengurangan', 25, 24, '19-06-2021 02:48:17'),
 (25, 3, 'Pengurangan', 3, 2, '19-06-2021 02:58:37'),
 (26, 1, 'Pengurangan', 24, 23, '20-06-2021 02:43:06'),
 (27, 3, 'Pengurangan', 2, 0, '20-06-2021 02:43:06'),
-(28, 2, 'Pengurangan', 14, 13, '20-06-2021 02:57:10');
+(28, 2, 'Pengurangan', 14, 13, '20-06-2021 02:57:10'),
+(29, 6, '', 0, 20, '20-06-2021 19:02:50'),
+(35, 1, 'Penambahan', 23, 26, '20-06-2021 20:53:10'),
+(36, 1, 'Penambahan', 26, 30, '20-06-2021 20:54:01'),
+(37, 1, 'Penambahan', 30, 31, '20-06-2021 20:57:34');
 
 -- --------------------------------------------------------
 
@@ -290,6 +352,23 @@ INSERT INTO `pembayaran` (`id_pembayaran`, `id_pesanan`, `pembayar`, `tanggal`, 
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `pembayaran_pesanan`
+-- (See below for the actual view)
+--
+CREATE TABLE `pembayaran_pesanan` (
+`id_pembayaran` int(6)
+,`id_pesanan` int(5)
+,`pembayar` varchar(50)
+,`tanggal` char(10)
+,`metode` enum('BNI','OVO','Dana','Gopay')
+,`bukti` text
+,`status` enum('Belum Dibayar','Dibayar','Dikirim','Dibatalkan','Pembayaran Invalid')
+,`resi_pengiriman` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pesanan`
 --
 
@@ -310,9 +389,9 @@ CREATE TABLE `pesanan` (
 
 INSERT INTO `pesanan` (`id_pesanan`, `id_akun`, `tanggal`, `alamat`, `opsi_kirim`, `ongkos_kirim`, `status`, `resi_pengiriman`) VALUES
 (1, 2, '18-06-2021', 'Jalan Medan Binjai km 13,5', 'JNE', 7000, 'Belum Dibayar', '-'),
-(2, 3, '18-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Dibayar', '-'),
+(2, 3, '18-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Pembayaran Invalid', '-'),
 (3, 3, '19-06-2021', 'Jl. Medan-Binjai km 13,5, Kota Medan, Sumatera Utara, 20351', 'Jalur Nugraha Ekakurir (JNE), CTC', 7000, 'Pembayaran Invalid', '-'),
-(4, 4, '20-06-2021', 'Jalan Kasuari No 69, Kota Aceh Barat Daya, Nanggroe Aceh Darussalam (NAD), 20321', 'Jalur Nugraha Ekakurir (JNE), REG', 27000, 'Dibayar', '-'),
+(4, 4, '20-06-2021', 'Jalan Kasuari No 69, Kota Aceh Barat Daya, Nanggroe Aceh Darussalam (NAD), 20321', 'Jalur Nugraha Ekakurir (JNE), REG', 27000, 'Pembayaran Invalid', '-'),
 (5, 4, '20-06-2021', 'Jalan Kasuari No 69, Kota Aceh Barat Daya, Nanggroe Aceh Darussalam (NAD), 20321', 'Jalur Nugraha Ekakurir (JNE), REG', 27000, 'Belum Dibayar', '-');
 
 -- --------------------------------------------------------
@@ -388,9 +467,10 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `id_merk`, `nama`, `harga`, `ukuran`, `satuan_ukuran`, `satuan_barang`, `deskripsi`, `gambar`) VALUES
-(1, 1, 'BETADINE GARGLE 190 ML', 32000, 190, 1, 1, 'Obat kumur antiseptik untuk rongga mulut seperti gigi berlubang, gusi bengkak, sakit tenggorokan, sariawan, bau mulut dan nafas tak segar', 'apotek_online_k24klik_20201127090840359225_BETADINE-BIRU.jpg'),
+(1, 1, 'BETADINE GARGLE 190 ML', 32000, 190, 1, 1, '<p>asdas23234dasd</p>\r\n', '20062021155856_produk_download.jpg'),
 (2, 1, 'BETADINE GARGLE 100 ML', 17000, 100, 1, 1, 'Obat kumur antiseptik untuk rongga mulut seperti gigi berlubang, gusi bengkak, sakit tenggorokan, sariawan, bau mulut dan nafas tak segar', 'apotek_online_k24klik_201904291011331242_BETADINE.jpg'),
-(3, 1, 'BETADINE OINT 20 GR', 30000, 20, 2, 2, 'Salep luka yang dapat digunakan untuk luka terbuka maupun luka bakar.', 'apotek_online_k24klik_20200711015219359225_BETADIN-20G-1.jpg');
+(3, 1, 'BETADINE OINT 20 GR', 30000, 20, 2, 2, 'Salep luka yang dapat digunakan untuk luka terbuka maupun luka bakar.', 'apotek_online_k24klik_20200711015219359225_BETADIN-20G-1.jpg'),
+(6, 3, 'Bisolvon Extra 60 ML', 45000, 60, 1, 1, '<p>Bisolvon Extra merupakan obat yang digunakan untuk mengurangi dan mengencerkan dahak pada saluran pernapasan. Bisolvon mengandung dual zat aktif Bromhexin HCl dan Guaifenesin yang bekerja sebagai iritan pada saluran pernafasan di mana saat batuk, volume mukus ditingkatkan pada saluran napas serta menurunkan viskositasnya (menjadi lebih encer) sehingga dahak/lendir lebih mudah dikeluarkan dari saluran pernapasan. Fungsi kedua zat tersebut adalah ekspektoran yang dapat mengencerkan dahak atau lendir pada saluran pernafasan sehingga lebih mudah dikeluarkan bersamaan dengan batuk.</p>\r\n', '20062021140250_produk_apotek_online_k24klik_20201207105108359225_bisolfon-1.jpg');
 
 -- --------------------------------------------------------
 
@@ -409,10 +489,8 @@ CREATE TABLE `produk_jenis` (
 --
 
 INSERT INTO `produk_jenis` (`id_produk_jenis`, `id_produk`, `id_jenis`) VALUES
-(1, 1, 2),
 (2, 1, 1),
 (3, 2, 1),
-(4, 2, 2),
 (5, 3, 3),
 (6, 3, 4);
 
@@ -432,7 +510,29 @@ CREATE TABLE `produk_merk` (
 --
 
 INSERT INTO `produk_merk` (`id_merk`, `merk`) VALUES
-(1, 'Betadine');
+(1, 'Betadine'),
+(2, 'Salonpas'),
+(3, 'Bisolvon');
+
+--
+-- Triggers `produk_merk`
+--
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_merk_insert` BEFORE INSERT ON `produk_merk` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM produk_merk WHERE merk = NEW.merk)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_merk_update` BEFORE UPDATE ON `produk_merk` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM produk_merk WHERE merk = NEW.merk)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -453,6 +553,26 @@ INSERT INTO `produk_satuan_barang` (`id_satuan_barang`, `satuan`) VALUES
 (1, 'Botol'),
 (2, 'Tube');
 
+--
+-- Triggers `produk_satuan_barang`
+--
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_satuan_barang_insert` BEFORE INSERT ON `produk_satuan_barang` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM produk_satuan_barang WHERE satuan = NEW.satuan)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_satuan_barang_update` BEFORE UPDATE ON `produk_satuan_barang` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM produk_satuan_barang WHERE satuan = NEW.satuan)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -472,6 +592,26 @@ INSERT INTO `produk_satuan_ukuran` (`id_satuan_ukuran`, `satuan`) VALUES
 (1, 'ml'),
 (2, 'gr');
 
+--
+-- Triggers `produk_satuan_ukuran`
+--
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_satuan_ukuran_insert` BEFORE INSERT ON `produk_satuan_ukuran` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM produk_satuan_ukuran WHERE satuan = NEW.satuan)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'INSERT gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `cek_duplikat_satuan_ukuran_update` BEFORE UPDATE ON `produk_satuan_ukuran` FOR EACH ROW BEGIN
+	IF (EXISTS(SELECT 1 FROM produk_satuan_ukuran WHERE satuan = NEW.satuan)) THEN
+    SIGNAL SQLSTATE VALUE '45000' SET MESSAGE_TEXT = 'UPDATE gagal dikarenkan terdapat duplikasi data';
+  END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -490,9 +630,10 @@ CREATE TABLE `produk_stok` (
 --
 
 INSERT INTO `produk_stok` (`id_stok`, `id_produk`, `stok`, `diubah`) VALUES
-(1, 1, 23, '20-06-2021 02:43:06'),
+(1, 1, 31, '20-06-2021 20:57:34'),
 (3, 2, 13, '20-06-2021 02:57:10'),
-(5, 3, 0, '20-06-2021 02:43:06');
+(5, 3, 0, '20-06-2021 02:43:06'),
+(6, 6, 20, '20-06-2021 19:02:50');
 
 --
 -- Triggers `produk_stok`
@@ -554,7 +695,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `listproduk`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listproduk`  AS  select `p`.`id_produk` AS `id_produk`,`p`.`nama` AS `nama`,`m`.`merk` AS `merk`,`p`.`harga` AS `harga`,`p`.`ukuran` AS `ukuran`,`su`.`satuan` AS `satuan_ukuran`,`s`.`stok` AS `stok`,`s`.`diubah` AS `terakhir_diubah`,`sb`.`satuan` AS `satuan_barang`,`j`.`jenis` AS `jenis`,`p`.`deskripsi` AS `deskripsi`,`p`.`gambar` AS `gambar` from ((((((`produk` `p` join `produk_stok` `s` on(`p`.`id_produk` = `s`.`id_produk`)) join `produk_merk` `m` on(`p`.`id_merk` = `m`.`id_merk`)) join `produk_satuan_ukuran` `su` on(`p`.`satuan_ukuran` = `su`.`id_satuan_ukuran`)) join `produk_satuan_barang` `sb` on(`p`.`satuan_barang` = `sb`.`id_satuan_barang`)) join `produk_jenis` `pj` on(`pj`.`id_produk` = `p`.`id_produk`)) join `jenis_produk` `j` on(`pj`.`id_jenis` = `j`.`id_jenis`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `listproduk`  AS  select `p`.`id_produk` AS `id_produk`,`p`.`nama` AS `nama`,`m`.`merk` AS `merk`,`p`.`harga` AS `harga`,`p`.`ukuran` AS `ukuran`,`su`.`satuan` AS `satuan_ukuran`,`s`.`stok` AS `stok`,`s`.`diubah` AS `terakhir_diubah`,`sb`.`satuan` AS `satuan_barang`,`j`.`jenis` AS `jenis`,`p`.`deskripsi` AS `deskripsi`,`p`.`gambar` AS `gambar` from ((((((`produk` `p` join `produk_stok` `s` on(`p`.`id_produk` = `s`.`id_produk`)) join `produk_merk` `m` on(`p`.`id_merk` = `m`.`id_merk`)) join `produk_satuan_ukuran` `su` on(`p`.`satuan_ukuran` = `su`.`id_satuan_ukuran`)) join `produk_satuan_barang` `sb` on(`p`.`satuan_barang` = `sb`.`id_satuan_barang`)) left join `produk_jenis` `pj` on(`pj`.`id_produk` = `p`.`id_produk`)) left join `jenis_produk` `j` on(`pj`.`id_jenis` = `j`.`id_jenis`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pembayaran_pesanan`
+--
+DROP TABLE IF EXISTS `pembayaran_pesanan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pembayaran_pesanan`  AS  select `byr`.`id_pembayaran` AS `id_pembayaran`,`byr`.`id_pesanan` AS `id_pesanan`,`byr`.`pembayar` AS `pembayar`,`byr`.`tanggal` AS `tanggal`,`byr`.`metode` AS `metode`,`byr`.`bukti` AS `bukti`,`ps`.`status` AS `status`,`ps`.`resi_pengiriman` AS `resi_pengiriman` from (`pembayaran` `byr` join `pesanan` `ps` on(`byr`.`id_pesanan` = `ps`.`id_pesanan`)) ;
 
 -- --------------------------------------------------------
 
@@ -674,7 +824,7 @@ ALTER TABLE `produk_stok`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_akun` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `akun_db`
@@ -686,19 +836,19 @@ ALTER TABLE `akun_db`
 -- AUTO_INCREMENT for table `jenis_produk`
 --
 ALTER TABLE `jenis_produk`
-  MODIFY `id_jenis` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jenis` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `log_edit_profil`
 --
 ALTER TABLE `log_edit_profil`
-  MODIFY `id_log_edit_profil` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_log_edit_profil` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `log_produk_stok`
 --
 ALTER TABLE `log_produk_stok`
-  MODIFY `id_log_produk_stok` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_log_produk_stok` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -722,19 +872,19 @@ ALTER TABLE `pesanan_detail`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_produk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `produk_jenis`
 --
 ALTER TABLE `produk_jenis`
-  MODIFY `id_produk_jenis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_produk_jenis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `produk_merk`
 --
 ALTER TABLE `produk_merk`
-  MODIFY `id_merk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_merk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produk_satuan_barang`
@@ -752,7 +902,7 @@ ALTER TABLE `produk_satuan_ukuran`
 -- AUTO_INCREMENT for table `produk_stok`
 --
 ALTER TABLE `produk_stok`
-  MODIFY `id_stok` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_stok` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

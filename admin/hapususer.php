@@ -1,7 +1,9 @@
 <?php 
-$uname = $_GET['username'];
+session_start();
 
-$koneksi->query("DELETE FROM akun WHERE username='$uname'");
+$id_akun = $_GET['id'];
+
+$koneksi->query("DELETE FROM akun WHERE id_akun='$id_akun'");
 
 echo "<script>alert('Data Akun Dihapus!');</script>";
 echo "<script>location='index.php?halaman=user';</script>";

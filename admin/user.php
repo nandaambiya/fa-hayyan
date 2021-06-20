@@ -10,13 +10,15 @@
 </head>
 <body>
 
-<h2>Data User Alliswell88.id</h2>
+<h2>List Customer Fa-Hayyan</h2>
 <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
+        	<th>Nomor Akun</th>
 			<th>Nama</th>
 			<th>Email</th>
 			<th>Alamat</th>
+			<th>Kode Pos</th>
 			<th>Nomor HP</th>
 			<th></th>
         </tr>
@@ -25,19 +27,24 @@
     <tbody>
     <?php
         include 'koneksi.php';
-        $akun = mysqli_query($koneksi,"select * from akun");
-        while($row = mysqli_fetch_array($akun))
-        {
-            echo "<tr>
-            <td>".$row['nama']."</td>
-            <td>".$row['email']."</td>
-            <td>".$row['alamat']."</td>
-            <td>".$row['no_hp']."</td>
-			</td>
-			
-        </tr>"
-        ;
-        
+        $akun = mysqli_query($koneksi,"SELECT id_akun, email, nama, alamat, kode_pos, no_hp FROM akun");
+        while($row = mysqli_fetch_array($akun)) {
+    ?>
+        	<tr>
+        		<td><?= $row['id_akun'] ?></td>
+        		<td><?= $row['nama'] ?></td>
+        		<td><?= $row['email'] ?></td>
+        		<td><?= $row['alamat'] ?></td>
+        		<td><?= $row['kode_pos'] ?></td>
+        		<td><?= $row['no_hp'] ?></td>
+        		<td>
+        			<a class="btn btn-sm btn-success" href="?halaman=riwayat_profil&id=<?= $row['id_akun'] ?>&email=<?= $row['email'] ?>">Riwayat Data</a>
+        			<a class="btn btn-sm btn-danger" href="hapususer.php?id=<?= $row['id_akun'] ?>" onclick="return confirm('Yakin ingin menghapus akun ini?')">
+        				<i class="fa fa-trash-o"></i>
+        			</a>
+        		</td>
+        	</tr>
+    <?php    
         }
     ?>
 

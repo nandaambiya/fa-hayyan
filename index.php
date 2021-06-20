@@ -72,7 +72,7 @@ include 'koneksi.php';
 
       <div class="row">
         <?php
-        $queryambil = $koneksi->query("SELECT id_produk, nama, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY rand() LIMIT 9");
+        $queryambil = $koneksi->query("SELECT id_produk, nama, harga, gambar FROM listproduk WHERE stok > 0 GROUP BY id_produk ORDER BY rand() LIMIT 15");
 
         while ($data = $queryambil->fetch_assoc()) {
         ?>

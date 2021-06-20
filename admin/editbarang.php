@@ -3,140 +3,195 @@
 </head>
 <h3>Edit Data Produk</h3>
 <?php
-	$data = $koneksi->query("SELECT * FROM produk WHERE id_produk = '$_GET[id]'")->fetch_assoc();
+	$id_produk = $_GET['id'];
 
-	$warna = $koneksi->query("SELECT * FROM kategori_warna_produk WHERE id_warna = '$data[id_warna]'")->fetch_assoc();
-	$_SESSION['warna'] = $warna;
-
-	$edisi = $koneksi->query("SELECT id_edisi, edisi FROM kategori_produk_edisi WHERE id_edisi = '$warna[id_edisi]'")->fetch_assoc();
-	$_SESSION['edisi'] = $edisi;
+	$data = $koneksi->query("SELECT * FROM produk WHERE id_produk = '$id_produk'")->fetch_assoc();
 ?>
 <form enctype="multipart/form-data" method="POST">
 	<table class="table table-borderless">
 		<tr>
 			<td>Nama Produk</td>
 			<td></td>
-			<td><input required class="form-control" type="text" name="nama" value="<?php echo $data['nama_produk']; ?>"></td>
+			<td><input required class="form-control" type="text" name="nama" value="<?php echo $data['nama']; ?>"></td>
 		</tr>
 		<tr>
-			<td>Satuan Jenis</td>
+			<td>Merk</td>
 			<td></td>
 			<td>
-				<select name="satuan_jenis" id="satuan_jenis" class="form-control" required>
-					<option value="" selected>JENIS</option>
+				<select name="merk" id="merk" class="form-control" required>
+					<?php 
+						$ambilmerk = $koneksi->query("SELECT * FROM produk_merk");
+						while ($datamerk = $ambilmerk->fetch_assoc()) {
+							if ($datamerk['id_merk'] == $data['id_merk']) {
+					?>
+								<option value="<?= $datamerk['id_merk'] ?>" selected><?= $datamerk['merk'] ?></option>
+					<?php
+							} else {
+					?>
+								<option value="<?= $datamerk['id_merk'] ?>"><?= $datamerk['merk'] ?></option>
+					<?php
+							}
+						}
+					?>
 				</select>
 			</td>
+		</tr>
+		<tr>
+			<td>Ukuran</td>
+			<td></td>
+			<td><input required class="form-control" type="number" min="1" name="ukuran" value="<?php echo $data['ukuran']; ?>"></td>
 		</tr>
 		<tr>
 			<td>Satuan Ukuran</td>
 			<td></td>
 			<td>
 				<select name="satuan_ukuran" id="satuan_ukuran" class="form-control" required>
-					<option value="" selected>SATUAN UKURAN</option>
+					<?php 
+						$ambilukuran = $koneksi->query("SELECT * FROM produk_satuan_ukuran");
+						while ($dataukuran = $ambilukuran->fetch_assoc()) {
+							if ($dataukuran['id_satuan_ukuran'] == $data['satuan_ukuran']) {
+					?>
+								<option value="<?= $dataukuran['id_satuan_ukuran'] ?>" selected><?= $dataukuran['satuan'] ?></option>
+					<?php
+							} else {
+					?>
+								<option value="<?= $dataukuran['id_satuan_ukuran'] ?>"><?= $dataukuran['satuan'] ?></option>
+					<?php
+							}
+						}
+					?>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td>Satuan Barang</td>
+			<td>Jenis</td>
+			<td></td>
+			<td>
+				<a class="btn btn-info btn-sm" href="index.php?halaman=jenisbarang&id_produk=<?= $id_produk ?>">Tambah Jenis</a>
+				<br>
+				<?php
+					$ambiljenis = $koneksi->query("SELECT id_produk_jenis, id_jenis FROM produk_jenis WHERE id_produk = '$id_produk'");
+					while ($datajenis = $ambiljenis->fetch_assoc()) {
+						$namajenis = $koneksi->query("SELECT * FROM jenis_produk WHERE id_jenis = '$datajenis[id_jenis]'")->fetch_assoc();
+				?>
+					<a href="edit_barang_hapus_jenis.php?id=<?= $datajenis['id_produk_jenis'] ?>" onclick="return confirm('Hapus jenis?')">
+						&times;
+					</a>
+					&nbsp;&nbsp;&nbsp;<?= $namajenis['jenis']; ?><br>
+				<?php
+					}
+				?>
+			</td>
+		</tr>
+		<tr>
+			<td>Satuan Jual Barang</td>
 			<td></td>
 			<td>
 				<select name="satuan_barang" id="satuan_barang" class="form-control" required>
-					<option value="" selected>SATUAN BARANG</option>
+					<?php 
+						$ambilsatuan = $koneksi->query("SELECT * FROM produk_satuan_barang");
+						while ($datasatuan = $ambilsatuan->fetch_assoc()) {
+							if ($datasatuan['id_satuan_barang'] == $data['satuan_barang']) {
+					?>
+								<option value="<?= $datasatuan['id_satuan_barang'] ?>" selected><?= $datasatuan['satuan'] ?></option>
+					<?php
+							} else {
+					?>
+								<option value="<?= $datasatuan['id_satuan_barang'] ?>"><?= $datasatuan['satuan'] ?></option>
+					<?php
+							}
+						}
+					?>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>Harga (Rp)</td>
 			<td></td>
-			<td><input required class="form-control" type="number" min="1" name="harga" value="<?php echo $data['harga_produk']; ?>"></td>
+			<td><input required class="form-control" type="number" min="1" name="harga" value="<?php echo $data['harga']; ?>"></td>
 		</tr>
 		<tr>
 		<tr>
-			<td>Stok</td>
+			<td>
+				Tambah Stok
+				<br>
+				<small>Stok lama akan ditambah</small>
+			</td>
 			<td></td>
-			<td><input required class="form-control" type="number" min="0" name="stok" value="<?php echo $data['stok_produk']; ?>"></td>
+			<td><input placeholder="Tambah Stok" class="form-control" type="number" min="1" name="stok"></td>
 		</tr>
 		<tr>
-			<td>Deskripsi (opsional)</td>
+			<td>Deskripsi</td>
 			<td></td>
-			<td><textarea rows="15" cols="100" class="ckeditor" required class="form-control" name="deskripsi"><?php echo $data['deskripsi_produk']; ?></textarea></td>
+			<td><textarea rows="15" cols="100" class="ckeditor" required class="form-control" name="deskripsi"><?php echo $data['deskripsi']; ?></textarea></td>
 		</tr>
 		<tr>
 			<td>Foto</td>
-			<td width="125px"><img width="125px" src="../image/<?php echo($data['foto_produk']); ?>"></td>
+			<td width="125px"><img width="125px" src="../image/<?php echo($data['gambar']); ?>"></td>
 			<td><input class="form-control" type="file" name="foto" accept="image/*"></td>
 		</tr>
 	</table>
 	<button class="btn btn-success" name="simpan" onclick="return confirm('Perbaharui data?')">Simpan</button>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript">
-		$(document).ready(function(){
-          	$.ajax({
-                type: 'POST',
-              	url: "get_edisi_edit.php",
-              	cache: false, 
-              	success: function(msg){
-                  $("#edisi").html(msg);
-                }
-            });
-
-          	$("#edisi").change(function(){
-          	var edisi = $("#edisi").val();
-	          	$.ajax({
-	          		type: 'POST',
-	              	url: "get_warna_edit.php",
-	              	data: {edisi: edisi},
-	              	cache: false,
-	              	success: function(msg){
-	                  $("#warna").html(msg);
-	                }
-	            });
-            });
-         });
-	</script>
-
 <?php
 
 if (isset($_POST['simpan'])) {
-	$namafotobarang = $_FILES['foto']['name'];
+	$namafotobarang = date('dmYHis')."_produk_".$_FILES['foto']['name'];
 	$lokasisementarafoto = $_FILES['foto']['tmp_name'];
 
-	if (!empty($lokasisementarafoto)) {
-		move_uploaded_file($lokasisementarafoto, "../image/".$namafotobarang);
+	$nama = $_POST['nama'];
+	$merk = $_POST['merk'];
+	$ukuran = $_POST['ukuran'];
+	$satuan_ukuran = $_POST['satuan_ukuran'];
+	$satuan_barang = $_POST['satuan_barang'];
+	$harga = $_POST['harga'];
+	$deskripsi = $_POST['deskripsi'];
 
-		$koneksi->query("UPDATE produk SET 
-			nama_produk = '$_POST[nama]',
-			harga_produk = '$_POST[harga]',
-			deskripsi_produk = '$_POST[deskripsi]',
-			stok_produk = '$_POST[stok]',
-			foto_produk = '$namafotobarang',
-			id_jenis = '$_POST[jenis]',
-			id_warna = '$_POST[warna]'
-			WHERE id_produk = '$_GET[id]'
-			");
+	try {
+		$koneksi->begin_transaction();
+
+		if (!empty($lokasisementarafoto)) {
+			move_uploaded_file($lokasisementarafoto, "../image/".$namafotobarang);
+
+			$koneksi->query("UPDATE produk SET 
+				nama = '$nama',
+				id_merk = '$merk',
+				harga = '$harga',
+				ukuran = '$ukuran',
+				satuan_ukuran = '$satuan_ukuran',
+				satuan_barang = '$satuan_barang',
+				deskripsi = '$deskripsi',
+				gambar = '$namafotobarang'
+				WHERE id_produk = '$id_produk'
+				");
+		} else {
+			$koneksi->query("UPDATE produk SET 
+				nama = '$nama',
+				id_merk = '$merk',
+				harga = '$harga',
+				ukuran = '$ukuran',
+				satuan_ukuran = '$satuan_ukuran',
+				satuan_barang = '$satuan_barang',
+				deskripsi = '$deskripsi'
+				WHERE id_produk = '$id_produk'
+				");
+		}
+
+		if (!empty($_POST['stok'])) {
+			$stok = $_POST['stok'];
+			$koneksi->query("UPDATE produk_stok SET stok=stok+$stok WHERE id_produk = '$id_produk'");
+		}
+
+		$koneksi->commit();
 
 		echo "<script>alert('Data Disimpan!');</script>";
 		echo "<script>location='index.php?halaman=produk';</script>";
-	}
-	else{
-		$koneksi->query("UPDATE produk SET 
-			nama_produk = '$_POST[nama]',
-			harga_produk = '$_POST[harga]',
-			deskripsi_produk = '$_POST[deskripsi]',
-			stok_produk = '$_POST[stok]',
-			id_jenis = '$_POST[jenis]',
-			id_warna = '$_POST[warna]'
-			WHERE id_produk = '$_GET[id]'
-			");
-
-		echo "<script>alert('Data Disimpan!');</script>";
+	} catch (Exception $e) {
+		$koneksi->rollback();
+		echo "<script>alert('Data Gagal disimpan!');</script>";
 		echo "<script>location='index.php?halaman=produk';</script>";
 	}
-
-	unset($_SESSION['warna']);
-	unset($_SESSION['edisi']);
 }
 
 ?>
