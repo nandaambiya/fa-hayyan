@@ -177,7 +177,7 @@ include 'koneksi.php';
             required : "<font color = 'red'>No. HP tidak boleh kosong!</font>",
             digits : "<font color = 'red'>Format tidak sesuai!</font>",
             minlength : "No. HP minimal 3 digit.",
-            maxlength : "No. HP maksimal 20 digit."
+            maxlength : "No. HP maksimal 13 digit."
           },
           alamat:{
             required : "<font color = 'red'>Alamat tidak boleh kosong!</font>",

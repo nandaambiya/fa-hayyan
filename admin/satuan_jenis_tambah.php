@@ -14,3 +14,12 @@
    <a  href="index.php?halaman=satuan_jenis" class="btn btn-info">BACK</span></a>
 </form>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<?php
+	if (isset($_POST['simpan'])) {
+		$koneksi->query("INSERT INTO jenis_produk (jenis) VALUES ('$_POST[satuan_jenis]')");
+	
+	echo "<script>alert('Data Berhasil Ditambahkan!');</script>";
+	echo "<script>location='index.php?halaman=satuan_jenis';</script>";
+	}
+?>
