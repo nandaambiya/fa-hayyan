@@ -23,26 +23,36 @@
             <th>Jenis</th>
 			<th>Harga (Rp)</th>
 			<th>Stok</th>
-            <th width="50"></th>
+            <th width="142"></th>
         </tr>
     </thead>
     <tbody>
     <?php
-        include 'koneksi.php';
-        $produk = mysqli_query($koneksi,"select * from produk");
-        while($row = mysqli_fetch_array($produk))
-        {
-            $datajenis = $koneksi->query("SELECT * FROM kategori_produk_jenis WHERE id_jenis = '$row[id_jenis]'")->fetch_assoc();
-            $datawarna = $koneksi->query("SELECT * FROM kategori_warna_produk WHERE id_warna = '$row[id_warna]'")->fetch_assoc();
+        $produk = mysqli_query($koneksi,"SELECT id_produk, nama, harga, stok, gambar FROM listproduk GROUP BY id_produk");
+        while($row = mysqli_fetch_array($produk)) {
     ?>
         <tr>
             <td><?= $row['id_produk'] ?></td>
-            <td><img style="width: 100px" src="../image/<?= $row['foto_produk'] ?>"></td>
-            <td><?= $row['nama_produk'] ?></td>
-            <td><?= $datajenis['jenis'] ?></td>
-            <td><?= number_format($row['harga_produk']) ?></td>
-            <td><?= number_format($row['stok_produk']) ?></td>
+            <td><img style="width: 100px" src="../image/<?= $row['gambar'] ?>"></td>
+            <td><?= $row['nama'] ?></td>
+            <td>
+                <?php
+                    $jenis = $koneksi->query("SELECT jenis FROM listproduk WHERE id_produk = '$row[id_produk]'");
+                    $jumlah = $jenis->num_rows;
+                    $i = 1;
+                    while ($datajenis = $jenis->fetch_assoc()) {
+                        echo $datajenis['jenis'];
+                        if ($i < $jumlah) {
+                          echo ", ";
+                        }
+                        $i++;
+                    }
+                ?>
+            </td>
+            <td><?= number_format($row['harga']) ?></td>
+            <td><?= number_format($row['stok']) ?></td>
             <td><a class="btn btn-sm btn-info" href="?halaman=editbarang&id=<?= $row['id_produk'] ?>"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-success" href="#">Riwayat Stok</a>
                 <a class="btn btn-sm btn-danger" href="hapusbarang.php?id=<?= $row['id_produk'] ?>" onclick="return confirm('Yakin ingin menghapus produk ini?')"><i class="fa fa-trash-o"></i></a>
             </td>
         </tr>

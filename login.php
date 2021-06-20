@@ -79,7 +79,7 @@ else if(isset($_SESSION['admin'])){
               $_SESSION['admin'] = $data;
 
               echo "<script> alert('Login berhasil!') </script>";
-              echo "<script>location='admin/';</script>";
+              echo "<script>location='admin/index.php';</script>";
             }
 
             else if ($data['user_db'] == 2){

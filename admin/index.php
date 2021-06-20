@@ -1,8 +1,7 @@
 <?php 
+session_start();
 
 include 'koneksi.php';
-
-session_start();
 
 if (!isset($_SESSION['admin'])) {
     echo "<script>alert('Silakan login terlebih dahulu!');</script>";
@@ -88,15 +87,6 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     if ($_GET['halaman']=="produk"){
                         include 'produk.php';
                     }
-                    elseif ($_GET['halaman']=="produk_edisi"){
-                        include 'produk_edisi.php';
-                    }
-                    elseif ($_GET['halaman']=="produk_edisi_tambah"){
-                        include 'produk_edisi_tambah.php';
-                    }
-                    elseif ($_GET['halaman']=="detail_edisi"){
-                        include 'produk_edisi_detail.php';
-                    }
                     elseif ($_GET['halaman']=="pesanan"){
                         include 'orderan.php';
                     }
@@ -111,6 +101,10 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
                     elseif ($_GET['halaman']=="inputbarang")
                     {
                         include 'inputbarang.php';
+                    }
+                    elseif ($_GET['halaman']=="jenisbarang")
+                    {
+                        include 'jenisbarang.php';
                     }
                      elseif ($_GET['halaman']=="editbarang")
                     {
