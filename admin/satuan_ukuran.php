@@ -22,16 +22,23 @@
             <th width="50">Aksi</th>
         </tr>
     </thead>
-     <tbody>
-    
+    <tbody>
+    <?php
+        include 'koneksi.php';
+        $ukuran = mysqli_query($koneksi,"SELECT * FROM produk_satuan_ukuran");
+        while($row = mysqli_fetch_array($ukuran))
+        {
+        ?>
         <tr>
-            <td>1</td>
-            <td>Gr</td>
-            <td><a class="btn btn-sm btn-info" href="index.php?halaman=satuan_ukuran_ubah"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-sm btn-danger" href="index.php?halaman=satuan_ukuran_hapus" onclick="return confirm('Yakin ingin menghapus produk ini?')"><i class="fa fa-trash-o"></i></a>
+            <td><?= $row['id_satuan_ukuran'] ?></td>
+            <td><?= $row['satuan'] ?></td>
+            <td><a class="btn btn-sm btn-info" href="index.php?halaman=satuan_ukuran_ubah&id=<?= $row['id_satuan_ukuran'] ?>"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger" href="satuan_ukuran_hapus.php?id=<?= $row['id_satuan_ukuran'] ?>" onclick="return confirm('Yakin ingin menghapus satuan ini?')"><i class="fa fa-trash-o"></i></a>
             </td>
         </tr>
-   
+    <?php
+        }
+    ?>
     </tbody>
 
     <script>

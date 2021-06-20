@@ -1,5 +1,4 @@
 <?php
-// $koneksi = new mysqli("localhost","root","","alliswell88.id");
 if (isset($_SESSION['admin'])) {
 	$koneksi = mysqli_connect("localhost","admin_fa-hayyan","admin123","fa-hayyan");
 } else {

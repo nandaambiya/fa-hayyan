@@ -170,7 +170,7 @@
             required : "<font color = 'red'>No. HP tidak boleh kosong!</font>",
             digits : "<font color = 'red'>Format tidak sesuai!</font>",
             minlength : "No. HP minimal 5 digit.",
-            maxlength : "No. HP maksimal 20 digit."
+            maxlength : "No. HP maksimal 13 digit."
           },
           passbaru:{
             minlength : "Password minimal 6 karakter."

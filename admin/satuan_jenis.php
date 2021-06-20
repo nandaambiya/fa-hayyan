@@ -22,16 +22,23 @@
             <th width="50">Aksi</th>
         </tr>
     </thead>
-     <tbody>
-    
+    <tbody>
+    <?php
+        include 'koneksi.php';
+        $jenis = mysqli_query($koneksi,"SELECT * FROM jenis_produk");
+        while($row = mysqli_fetch_array($jenis))
+        {
+        ?>
         <tr>
-            <td>1</td>
-            <td>JENISSSSS</td>
-            <td><a class="btn btn-sm btn-info" href="index.php?halaman=satuan_jenis_ubah"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-sm btn-danger" href="index.php?halaman=satuan_jenis_hapus" onclick="return confirm('Yakin ingin menghapus produk ini?')"><i class="fa fa-trash-o"></i></a>
+            <td><?= $row['id_jenis'] ?></td>
+            <td><?= $row['jenis'] ?></td>
+            <td><a class="btn btn-sm btn-info" href="index.php?halaman=satuan_jenis_ubah&id=<?= $row['id_jenis'] ?>"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger" href="satuan_jenis_hapus.php?id=<?= $row['id_jenis'] ?>" onclick="return confirm('Yakin Ingin Menghapus Jenis Ini?')"><i class="fa fa-trash-o"></i></a>
             </td>
         </tr>
-   
+    <?php
+        }
+    ?>
     </tbody>
 
     <script>
