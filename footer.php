@@ -25,9 +25,19 @@
           Kategori
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="background-color: #FFF193;">
-          <a class="dropdown-item" href="kategori.php?kategori=Obat Kumur">Obat Kumur</a>
+          <a class="dropdown-item" href="kategori.php?kategori=Susu">Susu</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="kategori.php?kategori=Anak">Anak</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="kategori.php?kategori=Kecantikan">Kecantikan</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Bebas">Obat Bebas</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Herbal">Obat Herbal</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="kategori.php?kategori=Obat Bebas Terbatas">Obat Bebas Terbatas</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="kategori.php?kategori=Obat Keras">Obat Keras</a>
         </div>
             </li>
             <li><a href="keranjang.php">Cart</a></li>
