@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+include 'koneksi.php';
+
 $id_akun = $_GET['id'];
 
 $koneksi->query("DELETE FROM akun WHERE id_akun='$id_akun'");
