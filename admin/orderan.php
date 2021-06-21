@@ -11,6 +11,7 @@
 <body>
 
 <h2>Daftar Orderan</h2>
+<a class="btn btn-sm btn-success" href="tabel_penjualan.php">Export Data</a>
 <br><br>
 
 <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -57,11 +58,11 @@
 
     </tbody>
 </table>
-    <script>
+
+<script>
     $(document).ready(function(){
         $('#example').DataTable();
     });
 </script>		
-
 </body>
 </html>
