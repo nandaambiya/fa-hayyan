@@ -6,7 +6,7 @@
 <!-- Footer -->
   <section id="footer">
     <div class="container">
-      <div class="row text-center text-xs-center text-sm-left text-md-left">
+      <div class="row text-center text-xs-center text-sm-left text-md-left"><br>
         <div class="col-xs-14 col-sm-5 col-md-4">
           <<img src="icon/logo_obat.png" height="70">
           <br><br>
@@ -37,19 +37,19 @@
         <div class="col-xs-14 col-sm-4 col-md-4">
           <h5 style="color: #FFF193">Contact Us</h5>
           <ul class="list-unstyled quick-links">
-            <p style="color:white;"><i class="fa fa-location-arrow"></i> Jl Dr Kumpulan Pane No 12  </p>
-            <p style="color:white;"><i class="fa fa-phone"></i>  +62 812-62066450  </p>
-            <p style="color:white;"><i class="fa fa fa-envelope"></i> nandaambiya05@gmail.com  </p>
+            <p style="color:white;"><i class="fa fa-location-arrow"></i> Jl. Gambir Ps. VIII 38, Hutan, Kec. Percut Sei Tuan, Kabupaten Deli Serdang, Sumatera Utara 20371 </p>
+            <p style="color:white;"><i class="fa fa-phone"></i>  +62 813-9337-6056  </p>
+            <p style="color:white;"><i class="fa fa fa-envelope"></i> aufanizzah@@gmail.com  </p>
           </ul>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
           <ul class="list-unstyled list-inline social text-center quick-links">
             <li class="list-inline-item"><a href=""><img src="icon/kuning.png" height="40"></i></a></li>
             <li class="list-inline-item"><a href="" target="_blank"><img src="icon/kuning1.png" height="40"></a></li>
           </ul>
-      </div>
+      </div> -->
         <br><br><br>
         <hr>
       </div>  

@@ -33,7 +33,71 @@ if (!isset($_SESSION['admin'])) {
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
-  
+  <style type="text/css">
+      #container{
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background-image: url('foto_bukti_bayar/laptop.jpg');
+        background-color: cover;
+        background-size: 600px;
+      }
+      .avatar{
+        position: absolute;
+        top: 75%;
+        left: 40%;
+      }
+      .avatar img{
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        border: 10px solid white;
+      }
+      .avatar2{
+        position: absolute;
+        top: 75%;
+        left: 25%;
+      }
+      .avatar2 img{
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        border: 10px solid white;
+      }
+      .avatar3{
+        position: absolute;
+        top: 75%;
+        left: 10%;
+      }
+      .avatar3 img{
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        border: 10px solid white;
+      }
+      .avatar4{
+        position: absolute;
+        top: 75%;
+        left: 55%;
+      }
+      .avatar4 img{
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        border: 10px solid white;
+      }
+      .avatar5{
+        position: absolute;
+        top: 75%;
+        left: 70%;
+      }
+      .avatar5 img{
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        border: 10px solid white;
+      }
+  </style>
 </head>
 <body>
     <div id="wrapper">
@@ -73,12 +137,32 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                     <h2>Admin</h2>   
-                        <h5>Hallo <?php echo $_SESSION['admin']['nama']; ?></h5>
+                
+                <div id="container">
+                    <div class="avatar">
+                        <img src="foto_bukti_bayar/avatar.png">
                     </div>
-                </div>              
+                    <div class="avatar2">
+                        <img src="foto_bukti_bayar/avatar.png">
+                    </div>
+                    <div class="avatar3">
+                        <img src="foto_bukti_bayar/avatar.png">
+                    </div>
+                    <div class="avatar4">
+                        <img src="foto_bukti_bayar/avatar.png">
+                    </div>
+                    <div class="avatar5">
+                        <img src="foto_bukti_bayar/avatar.png">
+                    </div>
+
+                </div>   <br><br><center> 
+                <div class="row">
+                    <div class="col-md-11">
+                     <h1>Admin</h1>   
+                        <h3>Hallo <?php echo $_SESSION['admin']['nama']; ?></h3>
+                    </div>
+                </div>
+            </center>
                  <!-- /. ROW  -->
                   <hr />
                 <?php
