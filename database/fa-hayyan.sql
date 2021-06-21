@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2021 at 01:38 PM
+-- Generation Time: Jun 21, 2021 at 04:51 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -207,7 +207,9 @@ INSERT INTO `jenis_produk` (`id_jenis`, `jenis`) VALUES
 (11, 'Obat demam'),
 (12, 'Obat penambah darah'),
 (13, 'Obat sakit perut'),
-(14, 'Obat herbal');
+(14, 'Obat herbal'),
+(15, 'Kecantikan'),
+(16, 'Anak');
 
 --
 -- Triggers `jenis_produk`
@@ -369,7 +371,27 @@ INSERT INTO `log_produk_stok` (`id_log_produk_stok`, `id_produk`, `aksi`, `stok_
 (74, 45, 'Stok Baru', 0, 12, '21-06-2021 18:29:13'),
 (75, 46, 'Stok Baru', 0, 5, '21-06-2021 18:30:45'),
 (76, 47, 'Stok Baru', 0, 12, '21-06-2021 18:33:05'),
-(77, 48, 'Stok Baru', 0, 12, '21-06-2021 18:34:16');
+(77, 48, 'Stok Baru', 0, 12, '21-06-2021 18:34:16'),
+(78, 49, 'Stok Baru', 0, 5, '21-06-2021 20:18:26'),
+(79, 50, 'Stok Baru', 0, 12, '21-06-2021 20:22:01'),
+(80, 51, 'Stok Baru', 0, 1, '21-06-2021 20:25:04'),
+(81, 52, 'Stok Baru', 0, 0, '21-06-2021 20:26:41'),
+(82, 53, 'Stok Baru', 0, 20, '21-06-2021 20:28:15'),
+(83, 54, 'Stok Baru', 0, 2, '21-06-2021 20:35:47'),
+(84, 55, 'Stok Baru', 0, 18, '21-06-2021 20:38:46'),
+(85, 56, 'Stok Baru', 0, 1, '21-06-2021 20:43:17'),
+(86, 57, 'Stok Baru', 0, 5, '21-06-2021 20:45:13'),
+(87, 58, 'Stok Baru', 0, 27, '21-06-2021 20:59:11'),
+(88, 59, 'Stok Baru', 0, 7, '21-06-2021 21:02:16'),
+(89, 60, 'Stok Baru', 0, 5, '21-06-2021 21:05:31'),
+(90, 61, 'Stok Baru', 0, 15, '21-06-2021 21:10:07'),
+(91, 62, 'Stok Baru', 0, 6, '21-06-2021 21:11:33'),
+(93, 63, 'Stok Baru', 0, 30, '21-06-2021 21:26:08'),
+(94, 64, 'Stok Baru', 0, 8, '21-06-2021 21:30:36'),
+(95, 65, 'Stok Baru', 0, 9, '21-06-2021 21:33:12'),
+(96, 66, 'Stok Baru', 0, 3, '21-06-2021 21:35:39'),
+(97, 67, 'Stok Baru', 0, 5, '21-06-2021 21:37:26'),
+(98, 68, 'Stok Baru', 0, 7, '21-06-2021 21:40:22');
 
 -- --------------------------------------------------------
 
@@ -556,7 +578,27 @@ INSERT INTO `produk` (`id_produk`, `id_merk`, `nama`, `harga`, `ukuran`, `satuan
 INSERT INTO `produk` (`id_produk`, `id_merk`, `nama`, `harga`, `ukuran`, `satuan_ukuran`, `satuan_barang`, `deskripsi`, `gambar`) VALUES
 (46, 35, 'SCABIMITE CR 10G', 65000, 10, 2, 2, '<p>Scabimite merupakan obat berbentuk krim yang mengandung 5% permethrin.Scabimite diproduksi oleh PT. Galenium Pharmasia Lab-Indonesia dan telah terdaftar pada BPOM. Scabimite dapat digunakan untuk mengobati masalah kulit yaitu skabies (gatal pada kulit yang disebabkan oleh tungau atau kutu kecil).</p>\r\n\r\n<h2>Indikasi / Manfaat / Kegunaan :</h2>\r\n\r\n<p>skabies</p>\r\n\r\n<h2>Sub Kategori</h2>\r\n\r\n<p>Antijamur dan Antiparasit Topikal</p>\r\n\r\n<h2>Komposisi</h2>\r\n\r\n<p>permethrin 5%</p>\r\n\r\n<h2>Dosis</h2>\r\n\r\n<p>oleskan 1 kali sehari</p>\r\n\r\n<h2>Penyajian</h2>\r\n\r\n<p>oleskan pada bagian yang gatal di malam hari</p>\r\n\r\n<h2>Cara Penyimpanan</h2>\r\n\r\n<h2>Perhatian</h2>\r\n\r\n<p>hindari kontak dengan mata. ibu hamil dan menyusui. bayi</p>\r\n\r\n<h2>Efek Samping</h2>\r\n\r\n<p>rasa terbakar dan tersengat yang ringan dan sementara,gatal, eritema, ruam kulit</p>\r\n', '21062021133045_produk_apotek_online_k24klik_201810301024334677_scabimite.jpeg'),
 (47, 39, 'SIMVASTATIN KF 10MG', 3000, 10, 5, 7, '<p>Obat Simvastatin banyak diproduksi oleh perusahaan-perusahaan farmasi di Indonesia, salah satunya adalah Kimia Farma dengan potensi 20 mg. Simvastatin termasuk dalam golongan obat inhibitor reductase HMG CoA atau statin. Simvastatin mengurangi kadar kolesterol buruk (LDL) dan trigliserid dalam darah, sekaligus menaikkan kadar HDL (kolesterol baik). Selain itu, Simvastatin juga digunakan untuk menurunkan risiko stroke, serangan jantung, dan komplikasi jantung lainnya pada penderita diabetes, penyakit jantung koroner, atau faktor risiko yang lain. Simvastatin hanya digunakan oleh orang dewasa dan anak-anak paling tidak usia 10 tahun</p>\r\n\r\n<h2>Indikasi / Manfaat / Kegunaan :</h2>\r\n\r\n<p>Mengurangi kadar kolesterol total dan ldl pada penderita hiperkolesterolemia primer dan sekunder , meningkatkan kadar hdl</p>\r\n\r\n<h2>Sub Kategori</h2>\r\n\r\n<p>Obat Dislipidemia</p>\r\n\r\n<h2>Komposisi</h2>\r\n\r\n<p>Simvastatin 10 mg</p>\r\n\r\n<h2>Dosis</h2>\r\n\r\n<p>awal : 1 x 10 mg sehari sebagai anti hiperkolesterol ringan 5 mg sehari maksimal 40 mg sehari</p>\r\n\r\n<h2>Penyajian</h2>\r\n\r\n<p>Malam hari sebelum tidur</p>\r\n\r\n<h2>Cara Penyimpanan</h2>\r\n\r\n<p>Simpan ditempat sejuk dan kering, terlindung dari cahaya matahari</p>\r\n\r\n<h2>Perhatian</h2>\r\n\r\n<p>Jangan mengkonsumsi jus grapefruit secara berlebihan. Monitoring kadar lipid tiap 3 bulan (pada pemakaian lama). gangguan hepatik akut, peningkatan sgot/sgpt tanpa penjelasan, hamil dan laktasi</p>\r\n\r\n<h2>Efek Samping</h2>\r\n\r\n<p>nyeri abdomen, konstipasi, dan kembung</p>\r\n', '21062021133305_produk_simvastatin.jpg'),
-(48, 40, 'SIMVASTATIN HEXPHARM 10MG', 4000, 10, 5, 7, '<p>SIMVASTATIN HEXPHARM 10MG TAB 100S merupakan obat untuk mengurangi kadar kolesterol buruk (LDL) dan trigliserid dalam darah, sekaligus menaikkan kadar HDL (kolesterol baik) serta digunakan untuk menurunkan risiko kematian karena penyakit jantung koroner, menurunkan risiko infark miokard non fatal, menurunkan risiko pada pasien yang sedang menjalani tindakan revaskularisasi miokardial. Simvastatin termasuk obat golongan inhibitor reductase HMG CoA atau statin yang bekerja dengan cara menghambat enzim pembentuk kolesterol jahat sehingga kadar kolesterol dalam darah berkurang. Simvastatin dapat dikonsumsi sebelum atau sesudah makan pada malam hari, biasanya satu kali setiap hari di waktu malam sebelum tidur atau sesuai yang disarankan oleh dokter. Konsultasikan kepada dokter terlebih dahulu apabila akan digunakan pada pasien dengan kondisi alergi terhadap makanan atau kandungan yang terdapat pada obat ini, pasien dengan penyakit hati aktif atau peningkatan persisten transaminase serum, wanita hamil dan menyusui serta pasien dengan penyakit ginjal dan penyakit tiroid. Interaksi dapat terjadi apabila digunakan bersamaan dengan obat-obatan seperti: *Imunosupresan *Itrakonazol *Gemfibrozil *Niasin *Eritromisin *Kumarin *Antipirin *Propanolol *Digoksin Interaksi simvastatin dan makanan dapat terjadi terutama dengan grapefruit (limau gedang). Buah ini dapat meningkatkan penyerapan obat dalam aliran darah. Beli SIMVASTATIN HEXPHARM 10MG TAB 100S di K24Klik dan dapatkan manfaatnya.</p>\r\n\r\n<h2>Indikasi / Manfaat / Kegunaan :</h2>\r\n\r\n<p>Menurunkan kadar kolestrol total &amp; LDL pada pasien dengan hiperkolesterolemia primer (tipe IIa &amp; IIb).</p>\r\n\r\n<h2>Sub Kategori</h2>\r\n\r\n<p>Obat Dislipidemia</p>\r\n\r\n<h2>Komposisi</h2>\r\n\r\n<p>Simvastatin 10 mg</p>\r\n\r\n<h2>Dosis</h2>\r\n\r\n<p>Dapat diberikan sebelum atau sesudah makan pada malam hari.</p>\r\n\r\n<h2>Penyajian</h2>\r\n\r\n<p>Awal: 5-10 mg 1 kali sehari (malam hari). Maksimal 40 mg/hari sebagai dosis tunggal.</p>\r\n\r\n<h2>Cara Penyimpanan</h2>\r\n\r\n<p>Simpan di tempat sejuk dan kering, serta terhindar dari sinar matahari langsung.</p>\r\n\r\n<h2>Perhatian</h2>\r\n\r\n<p>*Pantau kadar kolesterol secara periodik selama terapi. Lakukan tes fungsi hati sebelum terapi, 6 &amp; 12 bulan setelah terapi pertam dan selanjutnya secara periodik. *Riwayat penyakit hati. *Miopati akut dan berat atau pasien dengan risiko gagal ginjal sekunder akibat rabdomiolisis.</p>\r\n\r\n<h2>Efek Samping</h2>\r\n\r\n<p>Nyeri perut, konstipasi, kembung, astenia, sakit kepala, miopati, rabdomiolisis, tremor, pusing, vertigo.</p>\r\n', '21062021133416_produk_apotek_online_k24klik_20200810110733359225_SIMVASTATIN-10-MG--2.jpg');
+(48, 40, 'SIMVASTATIN HEXPHARM 10MG', 4000, 10, 5, 7, '<p>SIMVASTATIN HEXPHARM 10MG TAB 100S merupakan obat untuk mengurangi kadar kolesterol buruk (LDL) dan trigliserid dalam darah, sekaligus menaikkan kadar HDL (kolesterol baik) serta digunakan untuk menurunkan risiko kematian karena penyakit jantung koroner, menurunkan risiko infark miokard non fatal, menurunkan risiko pada pasien yang sedang menjalani tindakan revaskularisasi miokardial. Simvastatin termasuk obat golongan inhibitor reductase HMG CoA atau statin yang bekerja dengan cara menghambat enzim pembentuk kolesterol jahat sehingga kadar kolesterol dalam darah berkurang. Simvastatin dapat dikonsumsi sebelum atau sesudah makan pada malam hari, biasanya satu kali setiap hari di waktu malam sebelum tidur atau sesuai yang disarankan oleh dokter. Konsultasikan kepada dokter terlebih dahulu apabila akan digunakan pada pasien dengan kondisi alergi terhadap makanan atau kandungan yang terdapat pada obat ini, pasien dengan penyakit hati aktif atau peningkatan persisten transaminase serum, wanita hamil dan menyusui serta pasien dengan penyakit ginjal dan penyakit tiroid. Interaksi dapat terjadi apabila digunakan bersamaan dengan obat-obatan seperti: *Imunosupresan *Itrakonazol *Gemfibrozil *Niasin *Eritromisin *Kumarin *Antipirin *Propanolol *Digoksin Interaksi simvastatin dan makanan dapat terjadi terutama dengan grapefruit (limau gedang). Buah ini dapat meningkatkan penyerapan obat dalam aliran darah. Beli SIMVASTATIN HEXPHARM 10MG TAB 100S di K24Klik dan dapatkan manfaatnya.</p>\r\n\r\n<h2>Indikasi / Manfaat / Kegunaan :</h2>\r\n\r\n<p>Menurunkan kadar kolestrol total &amp; LDL pada pasien dengan hiperkolesterolemia primer (tipe IIa &amp; IIb).</p>\r\n\r\n<h2>Sub Kategori</h2>\r\n\r\n<p>Obat Dislipidemia</p>\r\n\r\n<h2>Komposisi</h2>\r\n\r\n<p>Simvastatin 10 mg</p>\r\n\r\n<h2>Dosis</h2>\r\n\r\n<p>Dapat diberikan sebelum atau sesudah makan pada malam hari.</p>\r\n\r\n<h2>Penyajian</h2>\r\n\r\n<p>Awal: 5-10 mg 1 kali sehari (malam hari). Maksimal 40 mg/hari sebagai dosis tunggal.</p>\r\n\r\n<h2>Cara Penyimpanan</h2>\r\n\r\n<p>Simpan di tempat sejuk dan kering, serta terhindar dari sinar matahari langsung.</p>\r\n\r\n<h2>Perhatian</h2>\r\n\r\n<p>*Pantau kadar kolesterol secara periodik selama terapi. Lakukan tes fungsi hati sebelum terapi, 6 &amp; 12 bulan setelah terapi pertam dan selanjutnya secara periodik. *Riwayat penyakit hati. *Miopati akut dan berat atau pasien dengan risiko gagal ginjal sekunder akibat rabdomiolisis.</p>\r\n\r\n<h2>Efek Samping</h2>\r\n\r\n<p>Nyeri perut, konstipasi, kembung, astenia, sakit kepala, miopati, rabdomiolisis, tremor, pusing, vertigo.</p>\r\n', '21062021133416_produk_apotek_online_k24klik_20200810110733359225_SIMVASTATIN-10-MG--2.jpg'),
+(49, 41, 'Sabun Bengkoang', 7000, 90, 2, 3, '<p>Sabun Herbal dari Tazakka dengan ekstrak Bengkoang sangat cocok untuk mencerahkan kulitmu.</p>\r\n', '21062021151826_produk_tazakka-sabunbengkoang.jpeg'),
+(50, 41, 'Sabun Madu', 7000, 90, 2, 3, '<p>Sabun herbal Tazakka dengan ekstrak madu propolis cocok untuk membuat kulitmu lebih lembab.</p>\r\n', '21062021152201_produk_tazakka-sabunmadu.jpeg'),
+(51, 41, 'Sabun Sirih', 7000, 90, 2, 3, '<p>Sabun herbal Tazakka dengan ekstrak sirih cocok untuk membuat kulitmu kencang.</p>\r\n', '21062021152504_produk_tazakka-sabunsirih.jpeg'),
+(52, 41, 'Sabun Susu', 7000, 90, 2, 3, '<p>Sabun herbal Tazakka mengandung susu ini cocok untuk merawat kesehatan kulitmu.</p>\r\n', '21062021152641_produk_tazakka-sabunsusu.jpeg'),
+(53, 41, 'Sabun Zaitun', 7000, 90, 2, 3, '<p>Sabun herbal Tazakka dengan kandungan Zaitun ini cocok untuk membuat kulitmu menjadi lebih lembab.</p>\r\n', '21062021152815_produk_tazakka-sabunzaitun.jpeg'),
+(54, 42, 'Madu Anak', 18500, 150, 2, 1, '<p>Madu dari Ratu Lebah untuk memperbaiki nafsu makan dan meningkatkan daya tahan tubuh anak.</p>\r\n', '21062021153547_produk_ratulebahjunior.jpeg'),
+(55, 42, 'Madu Hitam', 46000, 470, 2, 1, '<p>Madu Hitam dari Ratu Lebah cocok untuk meningkatkan daya tahan tubuh.</p>\r\n', '21062021153845_produk_ratulebah-maduhitam.jpeg'),
+(56, 43, 'Gold - G Bio Sea Cucumber', 35000, 100, 1, 1, '', '21062021154317_produk_gamatcairgold.jfif'),
+(57, 43, 'Madu Hitam Pahit', 55500, 470, 1, 1, '', '21062021154513_produk_gamatgold-maduhitam.jpeg'),
+(58, 44, 'Cussons Baby Almond & Rose Oil', 17000, 100, 1, 1, '', '21062021155911_produk_cussons-oil-pink.jpeg'),
+(59, 44, 'Cussons Baby Powder 2 + 1', 15000, 100, 2, 1, '', '21062021160216_produk_cussons-powder-all.jpg'),
+(60, 44, 'Cussons Baby Tisu Basah 1 + 1', 17000, 50, 6, 3, '', '21062021160531_produk_cussons-tisubasah-all.jpeg'),
+(61, 45, 'Dodo SA1', 14000, 1, 2, 6, '', '21062021161007_produk_dodo-sa1.jpeg'),
+(62, 45, 'Dodo 106N', 8500, 1, 2, 6, '', '21062021161133_produk_dodo-106n.jpeg'),
+(63, 48, 'Johnsons Baby Oil', 20000, 125, 1, 1, '', '21062021162608_produk_johnson-oil-all.jpeg'),
+(64, 49, 'Lactacyd Baby', 25500, 60, 1, 1, '', '21062021163036_produk_lactacyd-sabun.jpeg'),
+(65, 50, 'Telon Lang Minyak Telon', 36000, 150, 1, 1, '', '21062021163311_produk_lang-minyaktelon.jpeg'),
+(66, 51, 'Mami Breast Pump', 12000, 1, 2, 6, '', '21062021163539_produk_mamibreastpump.jpeg'),
+(67, 52, 'Mamy Love Wipes', 16000, 50, 6, 3, '', '21062021163726_produk_mamylovewipes-all.jpeg'),
+(68, 53, 'Marcks Bedak', 16000, 1, 2, 6, '', '21062021164022_produk_marcks.jpeg');
 
 -- --------------------------------------------------------
 
@@ -640,7 +682,34 @@ INSERT INTO `produk_jenis` (`id_produk_jenis`, `id_produk`, `id_jenis`) VALUES
 (72, 45, 3),
 (73, 46, 3),
 (74, 47, 3),
-(75, 48, 3);
+(75, 48, 3),
+(76, 49, 14),
+(77, 49, 15),
+(78, 50, 14),
+(79, 50, 15),
+(80, 51, 14),
+(81, 51, 15),
+(82, 52, 14),
+(83, 52, 15),
+(84, 53, 14),
+(85, 53, 15),
+(86, 54, 14),
+(87, 55, 14),
+(88, 56, 14),
+(89, 57, 14),
+(90, 58, 16),
+(91, 59, 16),
+(92, 59, 15),
+(93, 60, 16),
+(94, 61, 16),
+(95, 62, 16),
+(101, 63, 16),
+(102, 64, 16),
+(103, 65, 16),
+(104, 66, 16),
+(105, 67, 16),
+(106, 67, 15),
+(107, 68, 15);
 
 -- --------------------------------------------------------
 
@@ -693,7 +762,18 @@ INSERT INTO `produk_merk` (`id_merk`, `merk`) VALUES
 (36, 'Simvastatin'),
 (37, 'Voltadex'),
 (39, 'Generik'),
-(40, 'HEXPHARM');
+(40, 'HEXPHARM'),
+(41, 'Tazakka'),
+(42, 'Ratu Lebah'),
+(43, 'Gamat Gold'),
+(44, 'Cussons Baby'),
+(45, 'Dodo'),
+(48, 'Johnsons'),
+(49, 'Lactacyd'),
+(50, 'Telon Lang'),
+(51, 'Mami'),
+(52, 'Mamy'),
+(53, 'Marcks');
 
 --
 -- Triggers `produk_merk`
@@ -779,7 +859,8 @@ INSERT INTO `produk_satuan_ukuran` (`id_satuan_ukuran`, `satuan`) VALUES
 (2, 'gr'),
 (3, 'kg'),
 (4, 'l'),
-(5, 'mg');
+(5, 'mg'),
+(6, 'sheets');
 
 --
 -- Triggers `produk_satuan_ukuran`
@@ -858,7 +939,27 @@ INSERT INTO `produk_stok` (`id_stok`, `id_produk`, `stok`, `diubah`) VALUES
 (43, 45, 12, '21-06-2021 18:29:13'),
 (44, 46, 5, '21-06-2021 18:30:45'),
 (45, 47, 12, '21-06-2021 18:33:05'),
-(46, 48, 12, '21-06-2021 18:34:16');
+(46, 48, 12, '21-06-2021 18:34:16'),
+(47, 49, 5, '21-06-2021 20:18:26'),
+(48, 50, 12, '21-06-2021 20:22:01'),
+(49, 51, 1, '21-06-2021 20:25:04'),
+(50, 52, 0, '21-06-2021 20:26:41'),
+(51, 53, 20, '21-06-2021 20:28:15'),
+(52, 54, 2, '21-06-2021 20:35:47'),
+(53, 55, 18, '21-06-2021 20:38:46'),
+(54, 56, 1, '21-06-2021 20:43:17'),
+(55, 57, 5, '21-06-2021 20:45:13'),
+(56, 58, 27, '21-06-2021 20:59:11'),
+(57, 59, 7, '21-06-2021 21:02:16'),
+(58, 60, 5, '21-06-2021 21:05:31'),
+(59, 61, 15, '21-06-2021 21:10:07'),
+(60, 62, 6, '21-06-2021 21:11:33'),
+(61, 63, 30, '21-06-2021 21:26:08'),
+(62, 64, 8, '21-06-2021 21:30:36'),
+(63, 65, 9, '21-06-2021 21:33:12'),
+(64, 66, 3, '21-06-2021 21:35:39'),
+(65, 67, 5, '21-06-2021 21:37:26'),
+(66, 68, 7, '21-06-2021 21:40:22');
 
 --
 -- Triggers `produk_stok`
@@ -1061,7 +1162,7 @@ ALTER TABLE `akun_db`
 -- AUTO_INCREMENT for table `jenis_produk`
 --
 ALTER TABLE `jenis_produk`
-  MODIFY `id_jenis` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_jenis` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `log_edit_profil`
@@ -1073,7 +1174,7 @@ ALTER TABLE `log_edit_profil`
 -- AUTO_INCREMENT for table `log_produk_stok`
 --
 ALTER TABLE `log_produk_stok`
-  MODIFY `id_log_produk_stok` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id_log_produk_stok` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -1097,19 +1198,19 @@ ALTER TABLE `pesanan_detail`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_produk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `produk_jenis`
 --
 ALTER TABLE `produk_jenis`
-  MODIFY `id_produk_jenis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_produk_jenis` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `produk_merk`
 --
 ALTER TABLE `produk_merk`
-  MODIFY `id_merk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_merk` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `produk_satuan_barang`
@@ -1121,13 +1222,13 @@ ALTER TABLE `produk_satuan_barang`
 -- AUTO_INCREMENT for table `produk_satuan_ukuran`
 --
 ALTER TABLE `produk_satuan_ukuran`
-  MODIFY `id_satuan_ukuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_satuan_ukuran` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `produk_stok`
 --
 ALTER TABLE `produk_stok`
-  MODIFY `id_stok` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_stok` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- Constraints for dumped tables
