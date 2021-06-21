@@ -17,7 +17,7 @@
         <div class="col-xs-14 col-sm-6 col-md-4">
           <h5 style="color: #FFF193">Quick links</h5>
           <ul class="list-unstyled quick-links">
-            <li><a href="allstuff.php">Shop All</a></li>
+            <li><a href="allstuff.php">Semua Produk</a></li>
             <!-- <li><a href="http://localhost/tubesIMK/edisi.php?item=1"></i>Masker</a></li>
             <li><a href="http://localhost/tubesIMK/edisi.php?item=2"></i>Scrunchie</a></li> -->
             <li class="nav-item dropdown">
