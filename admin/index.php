@@ -38,14 +38,14 @@ if (!isset($_SESSION['admin'])) {
         position: relative;
         width: 100%;
         height: 300px;
-        background-image: url('foto_bukti_bayar/laptop.jpg');
+        background-image: url('img/laptop.jpg');
         background-color: cover;
         background-size: 600px;
       }
       .avatar{
         position: absolute;
         top: 75%;
-        left: 40%;
+        left: 47%;
       }
       .avatar img{
         width: 120px;
@@ -56,7 +56,7 @@ if (!isset($_SESSION['admin'])) {
       .avatar2{
         position: absolute;
         top: 75%;
-        left: 25%;
+        left: 28%;
       }
       .avatar2 img{
         width: 120px;
@@ -67,7 +67,7 @@ if (!isset($_SESSION['admin'])) {
       .avatar3{
         position: absolute;
         top: 75%;
-        left: 10%;
+        left: 9%;
       }
       .avatar3 img{
         width: 120px;
@@ -78,7 +78,7 @@ if (!isset($_SESSION['admin'])) {
       .avatar4{
         position: absolute;
         top: 75%;
-        left: 55%;
+        left: 66%;
       }
       .avatar4 img{
         width: 120px;
@@ -89,7 +89,7 @@ if (!isset($_SESSION['admin'])) {
       .avatar5{
         position: absolute;
         top: 75%;
-        left: 70%;
+        left: 85%;
       }
       .avatar5 img{
         width: 120px;
@@ -138,33 +138,7 @@ font-size: 16px; font-family: roboto-sans;"><a href="index.php?halaman=logout" c
         <div id="page-wrapper" >
             <div id="page-inner">
                 
-                <div id="container">
-                    <div class="avatar">
-                        <img src="foto_bukti_bayar/avatar.png">
-                    </div>
-                    <div class="avatar2">
-                        <img src="foto_bukti_bayar/avatar.png">
-                    </div>
-                    <div class="avatar3">
-                        <img src="foto_bukti_bayar/avatar.png">
-                    </div>
-                    <div class="avatar4">
-                        <img src="foto_bukti_bayar/avatar.png">
-                    </div>
-                    <div class="avatar5">
-                        <img src="foto_bukti_bayar/avatar.png">
-                    </div>
-
-                </div>   <br><br><center> 
-                <div class="row">
-                    <div class="col-md-11">
-                     <h1>Admin</h1>   
-                        <h3>Hallo <?php echo $_SESSION['admin']['nama']; ?></h3>
-                    </div>
-                </div>
-            </center>
-                 <!-- /. ROW  -->
-                  <hr />
+                
                 <?php
                 if (isset($_GET['halaman']))
                 {
