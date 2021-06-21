@@ -15,7 +15,7 @@
           </ul>
         </div>
         <div class="col-xs-14 col-sm-6 col-md-4">
-          <h5 style="color: #fff1b5">Quick links</h5>
+          <h5 style="color: #FFF193">Quick links</h5>
           <ul class="list-unstyled quick-links">
             <li><a href="allstuff.php">Shop All</a></li>
             <!-- <li><a href="http://localhost/tubesIMK/edisi.php?item=1"></i>Masker</a></li>
@@ -24,7 +24,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Kategori
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="background-color: #2a351f;">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="background-color: #FFF193;">
           <a class="dropdown-item" href="kategori.php?kategori=Obat Kumur">Obat Kumur</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="kategori.php?kategori=Obat Bebas Terbatas">Obat Bebas Terbatas</a>
@@ -35,21 +35,22 @@
           </ul>
         </div>
         <div class="col-xs-14 col-sm-4 col-md-4">
-          <h5 style="color: #fff1b5">Contact Us</h5>
+          <h5 style="color: #FFF193">Contact Us</h5>
           <ul class="list-unstyled quick-links">
-            <p style="color:white;"><i class="fa fa-location-arrow"></i> Jl. Ksatria No.25, Satria, Kec. Binjai Kota, Kota Binjai, Sumatera Utara 20714 </p>
-            <p style="color:white;"><i class="fa fa-phone"></i>  +62 882-6638-8888  </p>
-            <p style="color:white;"><i class="fa fa fa-envelope"></i> Surbaktigabriella@gmail.com  </p>
+            <p style="color:white;"><i class="fa fa-location-arrow"></i> Jl Dr Kumpulan Pane No 12  </p>
+            <p style="color:white;"><i class="fa fa-phone"></i>  +62 812-62066450  </p>
+            <p style="color:white;"><i class="fa fa fa-envelope"></i> nandaambiya05@gmail.com  </p>
           </ul>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
           <ul class="list-unstyled list-inline social text-center quick-links">
-            <li class="list-inline-item"><a href=""><img src="icon/instagram.png" height="40"></i></a></li>
-            <li class="list-inline-item"><a href="" target="_blank"><img src="icon/shopee.png" height="40"></a></li>
+            <li class="list-inline-item"><a href=""><img src="icon/kuning.png" height="40"></i></a></li>
+            <li class="list-inline-item"><a href="" target="_blank"><img src="icon/kuning1.png" height="40"></a></li>
           </ul>
-        </div>
+      </div>
+        <br><br><br>
         <hr>
       </div>  
       <div class="row">

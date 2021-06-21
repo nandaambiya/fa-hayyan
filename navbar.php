@@ -55,9 +55,7 @@
                     <!-- Shopping cart icon -->
     <ul class="nav justify-content-end" >
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-		<a class="nav-link navbar-link-2 waves-effect" href="#!" data-toggle="modal" data-target="#myModal"><img src="icon/Search2.png" height="30"></a>
-	  </li>
+      
       <li class="nav-item">
         <a href="keranjang.php" class="nav-link navbar-link-2 waves-effect">
           <?php
@@ -72,20 +70,23 @@
               echo "<span class='badge badge-pill badge-danger'>".$isikeranjang."</span>";
             }
           ?>
-          <img src="icon/Cart2.png" height="30"> 
+          <img src="icon/kuning1.png" height="30"> 
         </a>
       </li>
 
       <li class="nav-item">
         <a <?php if(isset($_SESSION['customer'])){echo "href='profil.php'";} else{echo "href='login.php'";} ?> class="nav-link navbar-link-2 waves-effect">
-          <img src="icon/People2.png" height="30">
+          <img src="icon/kuning2.png" height="30">
         </a>
       </li>
       <li class="nav-item">
+    <a class="nav-link navbar-link-2 waves-effect" href="#!" data-toggle="modal" data-target="#myModal"><img src="icon/kuning.png" height="30"></a>
+    </li>
+      <!-- <li class="nav-item">
         <a href="review.php" class="nav-link navbar-link-2 waves-effect">
           <img src="icon/comment.png" height="20">
         </a>
-      </li>
+      </li> -->
     </ul>
     </ul>
 
@@ -98,7 +99,7 @@
         <div class="modal-header modal-xl">
           <form action="search.php" method="get" class="form-inline form-xl">
             <input name="keyword" class="form-control" type="text" style="width: 376px;" placeholder="Search" aria-label="Search">
-            <button class="btn" type="submit"><img src="icon/Search2.png" height="30"></button>
+            <button class="btn" type="submit"><img src="icon/kuning.png" height="30"></button>
           </form>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
