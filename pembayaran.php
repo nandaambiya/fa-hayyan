@@ -110,8 +110,8 @@ if ($datapesanan['status'] != "Pembayaran Invalid" && $datapesanan['status'] != 
       			$querycek = $koneksi->query("SELECT id_pesanan FROM pembayaran WHERE id_pesanan = '$id_pesanan'");
       			$adadata = $querycek->num_rows;
 
+            $koneksi->begin_transaction();
             try {
-              $koneksi->begin_transaction();
 
         			if ($adadata == 0) {
         				$koneksi->query("INSERT INTO pembayaran (id_pesanan, pembayar, tanggal, metode, bukti)
@@ -121,13 +121,13 @@ if ($datapesanan['status'] != "Pembayaran Invalid" && $datapesanan['status'] != 
         				$koneksi->query("UPDATE pembayaran SET pembayar = '$nama_pembayar', metode = '$metode_bayar', tanggal = '$tanggal', bukti = '$namabukti' WHERE id_pesanan = '$id_pesanan'");
         			}
 
-        			$lokasibukti = $_FILES['bukti']['tmp_name'];
-            	$lokasisimpan = "admin/foto_bukti_bayar/";
-            	move_uploaded_file($lokasibukti, $lokasisimpan.$namabukti);
-
         			$koneksi->query("UPDATE pesanan SET status = 'Dibayar' WHERE id_pesanan = '$id_pesanan'");
 
               $koneksi->commit();
+
+        			$lokasibukti = $_FILES['bukti']['tmp_name'];
+            	$lokasisimpan = "admin/foto_bukti_bayar/";
+            	move_uploaded_file($lokasibukti, $lokasisimpan.$namabukti);
 
         			echo  '<script type="text/javascript">
                           swal({title: "Pembayaran Berhasil!", 
@@ -137,14 +137,14 @@ if ($datapesanan['status'] != "Pembayaran Invalid" && $datapesanan['status'] != 
                             window.location = "nota.php?id='.$id_pesanan.'";
                           });
                        </script>';
-            } catch (Exception $e) {
+            } catch (mysqli_sql_exception $e) {
               $koneksi->rollback();
               echo  '<script type="text/javascript">
-                                swal({title: "Checkout Gagal!", 
+                                swal({title: "Pembayaran Gagal!", 
                                   text: "Terjadi kesalahan!", 
                                   icon: "error"
                                 }).then(function() {
-                                  window.location = "keranjang.php";
+                                  window.location = "nota.php?id='.$id_pesanan.'";
                                 });
                              </script>';
             }

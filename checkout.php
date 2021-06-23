@@ -209,8 +209,8 @@
 			$opsi_pengiriman = $_SESSION['shipping']['kurir'].", ".$_SESSION['shipping']['jenisLayanan'];
 			$subtotal_pengiriman = $_SESSION['shipping']['tarif'];
 
+			$koneksi->begin_transaction();
 			try {
-				$koneksi->begin_transaction();
 
 				$koneksi->query("INSERT INTO pesanan (id_akun, tanggal, alamat, opsi_kirim, ongkos_kirim)
 									          VALUES ('$id_pemesan', date_format(now(),'%d-%m-%Y'), '$alamat_kirim', '$opsi_pengiriman', '$subtotal_pengiriman')");
@@ -235,7 +235,7 @@
 	                          window.location = "nota.php?id='.$id_pesanan.'";
 	                        });
 	                     </script>';
-            } catch (Exception $e) {
+            } catch (mysqli_sql_exception $e) {
 				$koneksi->rollback();
 				echo  '<script type="text/javascript">
 	                        swal({title: "Checkout Gagal!", 

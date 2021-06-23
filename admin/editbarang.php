@@ -148,8 +148,8 @@ if (isset($_POST['simpan'])) {
 	$harga = $_POST['harga'];
 	$deskripsi = $_POST['deskripsi'];
 
+	$koneksi->begin_transaction();
 	try {
-		$koneksi->begin_transaction();
 
 		if (!empty($lokasisementarafoto)) {
 			move_uploaded_file($lokasisementarafoto, "../image/".$namafotobarang);
@@ -187,7 +187,7 @@ if (isset($_POST['simpan'])) {
 
 		echo "<script>alert('Data Disimpan!');</script>";
 		echo "<script>location='index.php?halaman=produk';</script>";
-	} catch (Exception $e) {
+	} catch (mysqli_sql_exception $e) {
 		$koneksi->rollback();
 		echo "<script>alert('Data Gagal disimpan!');</script>";
 		echo "<script>location='index.php?halaman=produk';</script>";
